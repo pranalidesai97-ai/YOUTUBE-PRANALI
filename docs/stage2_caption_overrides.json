@@ -1,21 +1,21 @@
 {
- "note": "Hinglish lines are written in Roman script as spoken (not translated). Every Hindi word is a best-effort reconstruction and is flagged for your correction.",
+ "note": "UTF-8. Hindi speech in Devanagari, English in English, never translated. Hindi text is cross-checked across Whisper-medium (Hindi), Whisper (English mode) and Parakeet; every Hindi word stays flagged until confirmed by the speaker.",
  "replace": [
   {
    "words": [
     312,
     327
    ],
-   "text": "kaash mujhe kisi ne pehle bata diya hota, toh main alag cheez karti.",
-   "flag": "Hinglish, reconstructed; please correct"
+   "text": "काश मुझे किसी ने पहले बता दिया होता, तो मैं अलग चीज़ें करती।",
+   "flag": "Hindi, cross-checked: 'तो मैं अलग चीज़े करती' heard twice by Whisper-medium; 'काश… किसी ने… पहले बता दिया होता' supported by Parakeet ('ka sha… kisi na… ta diya auta') and Whisper ('Pahele Bata'); 'मुझे' least certain"
   },
   {
    "words": [
     477,
     485
    ],
-   "text": "ki Prince Charming aayega humare liye, but aisa nahi hota.",
-   "flag": "Hinglish, reconstructed; please correct"
+   "text": "Prince Charming आके हमें बचाएगा, but ऐसा नहीं होता।",
+   "flag": "Hindi, cross-checked: Whisper-medium 'प्रिंश शामिंग के हमें बच्छा आएगा', Parakeet 'charming a key hammer, but as a nahi hotta'; verb uncertain: 'बचाएगा' or 'बचाने आएगा'"
   },
   {
    "words": [
@@ -32,35 +32,28 @@
     383,
     395
    ],
-   "note": "R6 (held for review): 'come to the kingdom' unclear, may be Hinglish"
+   "note": "R6 (kept): Parakeet 'I think we'll have to come to the kingdom'; Whisper heard 'Prince Charming will come (to) rescue you' - suggestion: '…Prince Charming will come to rescue you.'"
   },
   {
    "words": [
     456,
     458
    ],
-   "note": "R8 (held): 'be your pillow' - maybe 'be your own pillar'?"
-  },
-  {
-   "words": [
-    676,
-    688
-   ],
-   "note": "off-camera conversation (held): words unclear"
+   "note": "R8 (kept): 'be your pillow' - maybe 'be your own pillar'?"
   },
   {
    "words": [
     819,
     820
    ],
-   "note": "'a person.' false start before 'personal financing'?"
+   "note": "'a person.' - false start before 'personal financing'?"
   },
   {
    "words": [
     845,
     845
    ],
-   "note": "'Tourism' - probably 'Third is'?"
+   "note": "R14 (kept): 'Tourism' - probably 'Third is'? (second recogniser: 'TODISM')"
   },
   {
    "words": [

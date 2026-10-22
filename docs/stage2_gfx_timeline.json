@@ -1,0 +1,573 @@
+[
+ {
+  "id": "KW1",
+  "type": "keywords",
+  "items": [
+   {
+    "text": "relationships",
+    "at": [
+     "relationships",
+     86
+    ],
+    "xy": [
+     1330,
+     210
+    ],
+    "t": 26.221
+   },
+   {
+    "text": "finances",
+    "at": [
+     "our finances",
+     89
+    ],
+    "xy": [
+     1420,
+     330
+    ],
+    "t": 29.341
+   },
+   {
+    "text": "mental health",
+    "at": [
+     "mental health",
+     92
+    ],
+    "xy": [
+     1310,
+     450
+    ],
+    "t": 31.821
+   },
+   {
+    "text": "physical health",
+    "at": [
+     "physical health",
+     93
+    ],
+    "xy": [
+     1380,
+     570
+    ],
+    "t": 32.701
+   }
+  ],
+  "t0": 26.221,
+  "t1": 34.701
+ },
+ {
+  "id": "B1",
+  "type": "broll",
+  "asset": "advice_bubbles",
+  "start": [
+   "seek help",
+   96
+  ],
+  "dur": 4.0,
+  "t0": 36.381,
+  "t1": 40.381
+ },
+ {
+  "id": "B2",
+  "type": "broll",
+  "asset": "calendar_thirty",
+  "start": [
+   "thirty next year",
+   135
+  ],
+  "dur": 3.0,
+  "t0": 47.821,
+  "t1": 50.821
+ },
+ {
+  "id": "PQ1",
+  "type": "pullquote",
+  "text": "Take all the help you need, but **do not wait** for someone to **rescue** you.",
+  "start": [
+   "take all the help",
+   221
+  ],
+  "end": [
+   "rescue you",
+   229
+  ],
+  "t0": 129.862,
+  "t1": 135.156
+ },
+ {
+  "id": "B3",
+  "type": "broll",
+  "asset": "fairytale_film",
+  "start": [
+   "movies charming",
+   262
+  ],
+  "dur": 5.2,
+  "t0": 152.686,
+  "t1": 157.886
+ },
+ {
+  "id": "NO1",
+  "type": "notes",
+  "heading": "Who decides for you?",
+  "items": [
+   {
+    "text": "parents",
+    "at": [
+     "parents try",
+     290
+    ],
+    "t": 163.25
+   },
+   {
+    "text": "partner",
+    "at": [
+     "partner gives",
+     299
+    ],
+    "t": 172.306
+   },
+   {
+    "text": "“someone will rescue you”",
+    "at": [
+     "someone will come",
+     307
+    ],
+    "t": 180.226
+   }
+  ],
+  "end": [
+   "fed to you over the years",
+   312
+  ],
+  "t0": 163.25,
+  "t1": 187.119
+ },
+ {
+  "id": "PQ2",
+  "type": "pullquote",
+  "text": "**Take charge** of your life.",
+  "start": [
+   "take charge of your life so do that",
+   342
+  ],
+  "end": [
+   "take charge of your life so do that",
+   342
+  ],
+  "min": 2.6,
+  "t0": 193.645,
+  "t1": 196.545
+ },
+ {
+  "id": "B4",
+  "type": "broll",
+  "asset": "budget_sheet",
+  "start": [
+   "as a woman you should know how to handle",
+   408
+  ],
+  "dur": 4.5,
+  "t0": 233.603,
+  "t1": 238.103
+ },
+ {
+  "id": "PQ3",
+  "type": "pullquote",
+  "text": "Whoever is **paying** for you is going to **control** your life.",
+  "start": [
+   "whoever is paying",
+   417
+  ],
+  "end": [
+   "control your life",
+   420
+  ],
+  "t0": 243.215,
+  "t1": 247.475
+ },
+ {
+  "id": "NO2",
+  "type": "notes",
+  "heading": "Learn the basics",
+  "items": [
+   {
+    "text": "investment",
+    "at": [
+     "investment",
+     436
+    ],
+    "t": 261.615
+   },
+   {
+    "text": "budgeting",
+    "at": [
+     "budgeting",
+     437
+    ],
+    "t": 263.295
+   },
+   {
+    "text": "stock market",
+    "at": [
+     "stock market",
+     439
+    ],
+    "t": 264.335
+   },
+   {
+    "text": "personal finance",
+    "at": [
+     "personal financing",
+     441
+    ],
+    "t": 266.351
+   }
+  ],
+  "end": [
+   "can help you",
+   444
+  ],
+  "t0": 261.615,
+  "t1": 270.925
+ },
+ {
+  "id": "B5",
+  "type": "broll",
+  "asset": "phone_scroll",
+  "start": [
+   "often when we are bored",
+   479
+  ],
+  "dur": 4.5,
+  "t0": 293.641,
+  "t1": 298.141
+ },
+ {
+  "id": "PQ4",
+  "type": "pullquote",
+  "text": "It is absolutely important to have a **creative outlet**.",
+  "start": [
+   "it is absolutely important to have",
+   494
+  ],
+  "end": [
+   "creative outlet",
+   497
+  ],
+  "t0": 308.701,
+  "t1": 312.699
+ },
+ {
+  "id": "KW2",
+  "type": "keywords",
+  "items": [
+   {
+    "text": "crocheting",
+    "at": [
+     "crocheting",
+     522
+    ],
+    "xy": [
+     1330,
+     200
+    ],
+    "t": 324.89
+   },
+   {
+    "text": "baking",
+    "at": [
+     "try baking",
+     523
+    ],
+    "xy": [
+     1450,
+     310
+    ],
+    "t": 325.93
+   },
+   {
+    "text": "singing",
+    "at": [
+     "singing",
+     524
+    ],
+    "xy": [
+     1300,
+     420
+    ],
+    "t": 327.53
+   },
+   {
+    "text": "dancing",
+    "at": [
+     "dancing",
+     525
+    ],
+    "xy": [
+     1460,
+     520
+    ],
+    "t": 328.17
+   },
+   {
+    "text": "pottery",
+    "at": [
+     "pottery class",
+     533
+    ],
+    "xy": [
+     1320,
+     620
+    ],
+    "t": 333.835
+   },
+   {
+    "text": "journaling",
+    "at": [
+     "do journaling",
+     536
+    ],
+    "xy": [
+     1440,
+     720
+    ],
+    "t": 337.755
+   }
+  ],
+  "t0": 324.89,
+  "t1": 339.755
+ },
+ {
+  "id": "PIP1",
+  "type": "pip",
+  "heading": "Write it down",
+  "bullets": [
+   {
+    "text": "What do I like to do when I'm bored?",
+    "at": [
+     "write down what i like",
+     562
+    ],
+    "t": 360.414
+   },
+   {
+    "text": "Is it that I'm just scrolling?",
+    "at": [
+     "is it that i'm just scrolling",
+     571
+    ],
+    "t": 368.254
+   },
+   {
+    "text": "Or am I actually doing something **creative**?",
+    "at": [
+     "or am i actually",
+     580
+    ],
+    "t": 373.906
+   }
+  ],
+  "start": [
+   "take a pen",
+   561
+  ],
+  "end": [
+   "for your own happiness",
+   586
+  ],
+  "t0": 358.734,
+  "t1": 382.246
+ },
+ {
+  "id": "B6",
+  "type": "broll",
+  "asset": "advice_noise",
+  "start": [
+   "people around us who often",
+   605
+  ],
+  "dur": 4.5,
+  "t0": 393.757,
+  "t1": 398.257
+ },
+ {
+  "id": "PQ5",
+  "type": "pullquote",
+  "text": "People will tell you what to do based on **their own experiences**.",
+  "start": [
+   "people will tell you",
+   660
+  ],
+  "end": [
+   "their own experiences",
+   664
+  ],
+  "t0": 437.291,
+  "t1": 442.729
+ },
+ {
+  "id": "NO3",
+  "type": "notes",
+  "heading": "Know your",
+  "items": [
+   {
+    "text": "values",
+    "at": [
+     "know your values",
+     676
+    ],
+    "t": 448.123
+   },
+   {
+    "text": "ethics",
+    "at": [
+     "know your ethics",
+     677
+    ],
+    "t": 449.163
+   },
+   {
+    "text": "**non-negotiables**",
+    "at": [
+     "know your non-negotiables",
+     678
+    ],
+    "t": 450.123
+   },
+   {
+    "text": "boundaries",
+    "at": [
+     "know your boundaries",
+     680
+    ],
+    "t": 452.363
+   }
+  ],
+  "end": [
+   "implement them in your life",
+   683
+  ],
+  "t0": 448.123,
+  "t1": 457.385
+ },
+ {
+  "id": "B7",
+  "type": "broll",
+  "asset": "signpost_choices",
+  "start": [
+   "like taking a trip",
+   765
+  ],
+  "dur": 5.5,
+  "t0": 517.73,
+  "t1": 523.23
+ },
+ {
+  "id": "PIP2",
+  "type": "pip",
+  "heading": "Decisions build confidence",
+  "bullets": [
+   {
+    "text": "Take **10** decisions for yourself",
+    "at": [
+     "10 decisions",
+     850
+    ],
+    "t": 567.867
+   },
+   {
+    "text": "maybe **2** go wrong",
+    "at": [
+     "two of them will go wrong",
+     852
+    ],
+    "t": 569.547
+   },
+   {
+    "text": "**8** go right",
+    "at": [
+     "eight will go right",
+     853
+    ],
+    "t": 571.067
+   },
+   {
+    "text": "those 8 give you confidence for the next **50**",
+    "at": [
+     "but that eight",
+     855
+    ],
+    "t": 572.187
+   }
+  ],
+  "start": [
+   "if you are taking 10",
+   849
+  ],
+  "end": [
+   "50 decisions in your life",
+   860
+  ],
+  "t0": 566.907,
+  "t1": 579.127
+ },
+ {
+  "id": "CC1",
+  "type": "corner_card",
+  "text": "Want a video on decision making? **Comment below**",
+  "start": [
+   "if you want another video",
+   884
+  ],
+  "dur": 3.5,
+  "t0": 594.599,
+  "t1": 598.099
+ },
+ {
+  "id": "PQ6",
+  "type": "pullquote",
+  "text": "Definitely listen to them, **and then** take the decision.",
+  "start": [
+   "so definitely listen to them",
+   923
+  ],
+  "end": [
+   "take the decision",
+   927
+  ],
+  "t0": 619.03,
+  "t1": 623.29
+ },
+ {
+  "id": "PQ7",
+  "type": "pullquote",
+  "text": "Be **confident**. Be **bold**.",
+  "start": [
+   "be confident",
+   968
+  ],
+  "end": [
+   "be bold",
+   969
+  ],
+  "min": 2.2,
+  "t0": 632.991,
+  "t1": 635.651
+ },
+ {
+  "id": "PQ7b",
+  "type": "pullquote",
+  "text": "Do not shy away from **speaking your heart** out.",
+  "start": [
+   "do not shy away",
+   971
+  ],
+  "end": [
+   "your heart out",
+   974
+  ],
+  "t0": 636.231,
+  "t1": 640.171
+ }
+]

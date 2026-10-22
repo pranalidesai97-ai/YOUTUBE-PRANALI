@@ -1,5 +1,5 @@
 {
- "note": "Approved high-confidence retakes only. Held for review: R6, R8, R12 (off-camera), R14, R15, R20, R25, R31.",
+ "note": "High-confidence retakes + user decisions of the final-edit revision. Kept for review: R6, R8 (flag), R14 (flag), R15, R25. R12: only the off-camera exchange removed. R20 removed (redundant repeat). R31 tightened.",
  "head_before_word": 0,
  "remove": [
   {
@@ -209,6 +209,30 @@
     1827
    ],
    "reason": "trailing 'Okay.' and tail"
+  },
+  {
+   "id": "R12a",
+   "words": [
+    677,
+    685
+   ],
+   "reason": "off-camera exchange only ('Three do you want? No. No. ...'); narration kept"
+  },
+  {
+   "id": "R20",
+   "words": [
+    1183,
+    1193
+   ],
+   "reason": "redundant repeat 'It's just absolutely important for you to know yourself first and'"
+  },
+  {
+   "id": "R31",
+   "words": [
+    1737,
+    1741
+   ],
+   "reason": "stutter/restart 'they know you. Better. They' -> 'they also know you better'"
   }
  ],
  "inserts": [
@@ -233,7 +257,7 @@
    "name": "title_3",
    "dur": 3.0,
    "before_word": 845,
-   "title": "Build Happiness and Creative Outlets"
+   "title": "Find Your Happiness and a Creative Outlet"
   },
   {
    "name": "title_4",
@@ -245,7 +269,7 @@
    "name": "title_5",
    "dur": 3.0,
    "before_word": 1371,
-   "title": "Make Better Decisions"
+   "title": "Learn to Make Your Own Decisions"
   },
   {
    "name": "end_screen",

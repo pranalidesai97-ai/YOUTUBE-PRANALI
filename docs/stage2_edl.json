@@ -210,93 +210,51 @@
   },
   {
    "type": "src",
-   "in": 357.8333333333333,
-   "out": 360.0,
-   "out_start": 208.3333
-  },
-  {
-   "type": "src",
-   "in": 361.03333333333336,
-   "out": 364.8666666666667,
-   "out_start": 210.5
-  },
-  {
-   "type": "src",
-   "in": 365.1666666666667,
-   "out": 367.26666666666665,
-   "out_start": 214.3333
-  },
-  {
-   "type": "src",
-   "in": 367.6,
-   "out": 368.0,
-   "out_start": 216.4333
-  },
-  {
-   "type": "src",
-   "in": 368.56666666666666,
-   "out": 369.8666666666667,
-   "out_start": 216.8333
-  },
-  {
-   "type": "src",
-   "in": 370.1666666666667,
-   "out": 370.6333333333333,
-   "out_start": 218.1333
-  },
-  {
-   "type": "src",
-   "in": 371.6333333333333,
-   "out": 372.1666666666667,
-   "out_start": 218.6
-  },
-  {
-   "type": "src",
-   "in": 372.46666666666664,
+   "in": 374.3,
    "out": 376.76666666666665,
-   "out_start": 219.1333
+   "out_start": 208.3333
   },
   {
    "type": "src",
    "in": 377.06666666666666,
    "out": 377.3666666666667,
-   "out_start": 223.4333
+   "out_start": 210.8
   },
   {
    "type": "src",
    "in": 377.73333333333335,
    "out": 381.43333333333334,
-   "out_start": 223.7333
+   "out_start": 211.1
   },
   {
    "type": "src",
    "in": 381.9,
    "out": 383.1,
-   "out_start": 227.4333
+   "out_start": 214.8
   },
   {
    "type": "src",
    "in": 385.96666666666664,
    "out": 386.4,
-   "out_start": 228.6333
+   "out_start": 216.0
   },
   {
    "type": "src",
    "in": 386.76666666666665,
    "out": 387.43333333333334,
-   "out_start": 229.0667
+   "out_start": 216.4333
   },
   {
    "type": "src",
    "in": 387.93333333333334,
    "out": 394.46666666666664,
-   "out_start": 229.7333
+   "out_start": 217.1
   },
   {
    "type": "src",
    "in": 399.96666666666664,
    "out": 400.03333333333336,
-   "out_start": 236.2667
+   "out_start": 223.6333
   },
   {
    "type": "card",
@@ -304,225 +262,225 @@
    "dur": 3.0,
    "before_word": 726,
    "title": "Take Control of Your Finances",
-   "out_start": 236.3333
+   "out_start": 223.7
   },
   {
    "type": "src",
    "in": 400.03333333333336,
    "out": 403.1666666666667,
-   "out_start": 239.3333
+   "out_start": 226.7
   },
   {
    "type": "src",
    "in": 403.73333333333335,
    "out": 405.93333333333334,
-   "out_start": 242.4667
+   "out_start": 229.8333
   },
   {
    "type": "src",
    "in": 406.5,
    "out": 417.4,
-   "out_start": 244.6667
+   "out_start": 232.0333
   },
   {
    "type": "src",
    "in": 417.5,
    "out": 448.6,
-   "out_start": 255.5667
+   "out_start": 242.9333
   },
   {
    "type": "src",
    "in": 450.03333333333336,
    "out": 453.76666666666665,
-   "out_start": 286.6667
+   "out_start": 274.0333
   },
   {
    "type": "src",
    "in": 455.76666666666665,
    "out": 456.43333333333334,
-   "out_start": 290.4
+   "out_start": 277.7667
   },
   {
    "type": "src",
    "in": 457.7,
    "out": 458.23333333333335,
-   "out_start": 291.0667
+   "out_start": 278.4333
   },
   {
    "type": "src",
    "in": 458.73333333333335,
    "out": 459.96666666666664,
-   "out_start": 291.6
+   "out_start": 278.9667
   },
   {
    "type": "src",
    "in": 460.06666666666666,
    "out": 461.6,
-   "out_start": 292.8333
+   "out_start": 280.2
   },
   {
    "type": "src",
    "in": 463.8,
    "out": 464.23333333333335,
-   "out_start": 294.3667
+   "out_start": 281.7333
   },
   {
    "type": "src",
    "in": 465.03333333333336,
    "out": 465.56666666666666,
-   "out_start": 294.8
+   "out_start": 282.1667
   },
   {
    "type": "src",
    "in": 465.6333333333333,
    "out": 466.26666666666665,
-   "out_start": 295.3333
+   "out_start": 282.7
   },
   {
    "type": "src",
    "in": 466.6666666666667,
    "out": 468.3333333333333,
-   "out_start": 295.9667
+   "out_start": 283.3333
   },
   {
    "type": "src",
    "in": 468.4,
    "out": 468.6,
-   "out_start": 297.6333
+   "out_start": 285.0
   },
   {
    "type": "card",
    "name": "title_3",
    "dur": 3.0,
    "before_word": 845,
-   "title": "Build Happiness and Creative Outlets",
-   "out_start": 297.8333
+   "title": "Find Your Happiness and a Creative Outlet",
+   "out_start": 285.2
   },
   {
    "type": "src",
    "in": 468.6,
    "out": 469.93333333333334,
-   "out_start": 300.8333
+   "out_start": 288.2
   },
   {
    "type": "src",
    "in": 471.46666666666664,
    "out": 471.8333333333333,
-   "out_start": 302.1667
+   "out_start": 289.5333
   },
   {
    "type": "src",
    "in": 472.4,
    "out": 476.03333333333336,
-   "out_start": 302.5333
+   "out_start": 289.9
   },
   {
    "type": "src",
    "in": 478.6666666666667,
    "out": 491.7,
-   "out_start": 306.1667
+   "out_start": 293.5333
   },
   {
    "type": "src",
    "in": 492.0,
    "out": 497.76666666666665,
-   "out_start": 319.2
+   "out_start": 306.5667
   },
   {
    "type": "src",
    "in": 506.6666666666667,
    "out": 514.2333333333333,
-   "out_start": 324.9667
+   "out_start": 312.3333
   },
   {
    "type": "src",
    "in": 517.0333333333333,
    "out": 521.9,
-   "out_start": 332.5333
+   "out_start": 319.9
   },
   {
    "type": "src",
    "in": 522.2666666666667,
    "out": 526.5,
-   "out_start": 337.4
+   "out_start": 324.7667
   },
   {
    "type": "src",
    "in": 527.8333333333334,
    "out": 531.1,
-   "out_start": 341.6333
+   "out_start": 329.0
   },
   {
    "type": "src",
    "in": 532.1333333333333,
    "out": 540.2333333333333,
-   "out_start": 344.9
+   "out_start": 332.2667
   },
   {
    "type": "src",
    "in": 540.5666666666667,
    "out": 541.2333333333333,
-   "out_start": 353.0
+   "out_start": 340.3667
   },
   {
    "type": "src",
    "in": 541.4666666666667,
    "out": 544.0,
-   "out_start": 353.6667
+   "out_start": 341.0333
   },
   {
    "type": "src",
    "in": 545.6333333333333,
    "out": 546.6666666666666,
-   "out_start": 356.2
+   "out_start": 343.5667
   },
   {
    "type": "src",
    "in": 546.8,
    "out": 554.7,
-   "out_start": 357.2333
+   "out_start": 344.6
   },
   {
    "type": "src",
    "in": 555.0333333333333,
    "out": 560.3,
-   "out_start": 365.1333
+   "out_start": 352.5
   },
   {
    "type": "src",
    "in": 560.3666666666667,
    "out": 568.0333333333333,
-   "out_start": 370.4
+   "out_start": 357.7667
   },
   {
    "type": "src",
    "in": 568.2,
    "out": 570.2666666666667,
-   "out_start": 378.0667
+   "out_start": 365.4333
   },
   {
    "type": "src",
    "in": 570.5,
    "out": 573.0,
-   "out_start": 380.1333
+   "out_start": 367.5
   },
   {
    "type": "src",
    "in": 575.0666666666667,
    "out": 578.8,
-   "out_start": 382.6333
+   "out_start": 370.0
   },
   {
    "type": "src",
    "in": 579.8333333333334,
    "out": 593.3333333333334,
-   "out_start": 386.3667
+   "out_start": 373.7333
   },
   {
    "type": "src",
    "in": 593.8,
    "out": 596.8333333333334,
-   "out_start": 399.8667
+   "out_start": 387.2333
   },
   {
    "type": "card",
@@ -530,232 +488,220 @@
    "dur": 3.0,
    "before_word": 1117,
    "title": "Know Yourself",
-   "out_start": 402.9
+   "out_start": 390.2667
   },
   {
    "type": "src",
    "in": 605.5,
    "out": 616.8,
-   "out_start": 405.9
+   "out_start": 393.2667
   },
   {
    "type": "src",
    "in": 617.0666666666667,
    "out": 628.7333333333333,
-   "out_start": 417.2
+   "out_start": 404.5667
   },
   {
    "type": "src",
-   "in": 629.4333333333333,
-   "out": 633.8,
-   "out_start": 428.8667
-  },
-  {
-   "type": "src",
-   "in": 634.7666666666667,
+   "in": 634.7,
    "out": 639.5666666666667,
-   "out_start": 433.2333
+   "out_start": 416.2333
   },
   {
    "type": "src",
    "in": 639.6666666666666,
    "out": 646.0,
-   "out_start": 438.0333
+   "out_start": 421.1
   },
   {
    "type": "src",
    "in": 646.4666666666667,
    "out": 655.6333333333333,
-   "out_start": 444.3667
+   "out_start": 427.4333
   },
   {
    "type": "src",
    "in": 660.0666666666667,
    "out": 662.3333333333334,
-   "out_start": 453.5333
+   "out_start": 436.6
   },
   {
    "type": "src",
    "in": 662.5,
    "out": 671.0,
-   "out_start": 455.8
+   "out_start": 438.8667
   },
   {
    "type": "src",
    "in": 675.6333333333333,
    "out": 687.4,
-   "out_start": 464.3
+   "out_start": 447.3667
   },
   {
    "type": "src",
    "in": 687.8,
    "out": 688.6333333333333,
-   "out_start": 476.0667
+   "out_start": 459.1333
   },
   {
    "type": "src",
    "in": 689.6,
    "out": 692.5333333333333,
-   "out_start": 476.9
+   "out_start": 459.9667
   },
   {
    "type": "src",
    "in": 693.6666666666666,
    "out": 698.5666666666667,
-   "out_start": 479.8333
+   "out_start": 462.9
   },
   {
    "type": "src",
    "in": 703.4333333333333,
    "out": 706.6333333333333,
-   "out_start": 484.7333
+   "out_start": 467.8
   },
   {
    "type": "src",
    "in": 725.0,
    "out": 729.5666666666667,
-   "out_start": 487.9333
+   "out_start": 471.0
   },
   {
    "type": "card",
    "name": "title_5",
    "dur": 3.0,
    "before_word": 1371,
-   "title": "Make Better Decisions",
-   "out_start": 492.5
+   "title": "Learn to Make Your Own Decisions",
+   "out_start": 475.5667
   },
   {
    "type": "src",
    "in": 729.6666666666666,
    "out": 735.0666666666667,
-   "out_start": 495.5
+   "out_start": 478.5667
   },
   {
    "type": "src",
    "in": 735.2333333333333,
    "out": 736.2333333333333,
-   "out_start": 500.9
+   "out_start": 483.9667
   },
   {
    "type": "src",
    "in": 736.4333333333333,
    "out": 741.6333333333333,
-   "out_start": 501.9
+   "out_start": 484.9667
   },
   {
    "type": "src",
    "in": 741.8666666666667,
    "out": 782.8333333333334,
-   "out_start": 507.1
+   "out_start": 490.1667
   },
   {
    "type": "src",
    "in": 805.2,
    "out": 808.7,
-   "out_start": 548.0667
+   "out_start": 531.1333
   },
   {
    "type": "src",
    "in": 809.1666666666666,
    "out": 813.5,
-   "out_start": 551.5667
+   "out_start": 534.6333
   },
   {
    "type": "src",
    "in": 814.3333333333334,
    "out": 817.7,
-   "out_start": 555.9
+   "out_start": 538.9667
   },
   {
    "type": "src",
    "in": 818.0666666666667,
    "out": 825.1666666666666,
-   "out_start": 559.2667
+   "out_start": 542.3333
   },
   {
    "type": "src",
    "in": 829.8333333333334,
    "out": 833.9333333333333,
-   "out_start": 566.3667
+   "out_start": 549.4333
   },
   {
    "type": "src",
    "in": 835.9333333333333,
    "out": 840.3333333333334,
-   "out_start": 570.4667
+   "out_start": 553.5333
   },
   {
    "type": "src",
    "in": 840.6,
    "out": 861.1666666666666,
-   "out_start": 574.8667
+   "out_start": 557.9333
   },
   {
    "type": "src",
    "in": 861.3666666666667,
    "out": 865.1666666666666,
-   "out_start": 595.4333
+   "out_start": 578.5
   },
   {
    "type": "src",
    "in": 865.7666666666667,
    "out": 876.4666666666667,
-   "out_start": 599.2333
+   "out_start": 582.3
   },
   {
    "type": "src",
    "in": 882.9666666666667,
    "out": 894.7666666666667,
-   "out_start": 609.9333
+   "out_start": 593.0
   },
   {
    "type": "src",
    "in": 897.2666666666667,
    "out": 902.2333333333333,
-   "out_start": 621.7333
+   "out_start": 604.8
   },
   {
    "type": "src",
    "in": 908.4,
-   "out": 917.5333333333333,
-   "out_start": 626.7
+   "out": 915.9666666666667,
+   "out_start": 609.7667
   },
   {
    "type": "src",
-   "in": 917.9,
-   "out": 918.9333333333333,
-   "out_start": 635.8333
-  },
-  {
-   "type": "src",
-   "in": 921.3,
+   "in": 921.7333333333333,
    "out": 931.4333333333333,
-   "out_start": 636.8667
+   "out_start": 617.3333
   },
   {
    "type": "src",
    "in": 943.5333333333333,
    "out": 945.7,
-   "out_start": 647.0
+   "out_start": 627.0333
   },
   {
    "type": "src",
    "in": 963.7666666666667,
    "out": 970.5666666666667,
-   "out_start": 649.1667
+   "out_start": 629.2
   },
   {
    "type": "src",
    "in": 971.1666666666666,
    "out": 979.1,
-   "out_start": 655.9667
+   "out_start": 636.0
   },
   {
    "type": "card",
    "name": "end_screen",
    "dur": 10.0,
-   "out_start": 663.9
+   "out_start": 643.9333
   }
  ],
- "duration": 673.9000000000002
+ "duration": 653.9333333333335
 }

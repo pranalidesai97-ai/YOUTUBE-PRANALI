@@ -94,7 +94,7 @@ def main():
                           and len(cur) < MAX_WORDS + 1 and gap <= GAP_BREAK)
             if ((len(cur) >= MAX_WORDS or len(text) > MAX_CHARS) and not orphan_fix
                     or gap > GAP_BREAK
-                    or re.search(r"[.?!]$", cur[-1][0])
+                    or re.search(r"[.?!।]$", cur[-1][0])
                     or (re.search(r",$", cur[-1][0]) and len(cur) >= 3)):
                 cues.append(cur)
                 cur = []
@@ -108,7 +108,7 @@ def main():
             out.append(f"[?{x}?]" if review and f else x)
         s = " ".join(out)
         # sentence case: capitalise only where a sentence starts
-        if n == 0 or re.search(r"[.?!]$", cues[n - 1][-1][0]):
+        if n == 0 or re.search(r"[.?!।]$", cues[n - 1][-1][0]):
             s = s[0].upper() + s[1:]
         return s
 
