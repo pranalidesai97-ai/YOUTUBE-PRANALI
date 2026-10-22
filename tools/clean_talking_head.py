@@ -31,6 +31,10 @@ LONG_GAP_EXTRA = 0.25
 MIN_REMOVAL = 0.30     # don't bother with tiny removals (rhythm > seconds saved)
 WINDOW = 0.05          # analysis window, seconds
 FADE = 0.012           # audio micro-fade at every cut, seconds (prevents clicks)
+VAD_CHUNK = 512         # Silero frame, samples at 16 kHz
+VAD_STEP = VAD_CHUNK / 16000
+VAD_SPEECH = 0.35      # conservative: lower than Silero's usual 0.5
+AFFTDN_LATENCY = 1200  # samples, measured (25 ms at 48 kHz)
 TARGET_LUFS = -16.0
 TARGET_TP = -1.5
 TARGET_LRA = 11.0
@@ -103,8 +107,8 @@ def percentile(vals, p):
 def find_gaps(levels):
     floor = percentile(levels, 10)
     speech = percentile(levels, 90)
-    thr = min(floor + 10.0, speech - 25.0)
-    thr = max(thr, floor + 4.0)
+    # quiet = more than 30 dB below typical speech level (never below floor + 4 dB)
+    thr = max(speech - 30.0, floor + 4.0)
     gaps, i = [], 0
     while i < len(levels):
         if levels[i] < thr:
@@ -120,25 +124,66 @@ def find_gaps(levels):
     return gaps, floor, speech, thr
 
 
-def plan_cuts(gaps, thr, total):
+def silero_probs(path, start, dur):
+    """Per-32 ms speech probability from the Silero VAD model (local, ONNX).
+
+    Returns None if the model is unavailable.
+    """
+    try:
+        import glob
+        import numpy as np
+        import onnxruntime
+        model = glob.glob(os.path.join(sys.prefix, "**", "silero_vad", "data", "silero_vad.onnx"),
+                          recursive=True) or \
+            glob.glob("/usr/local/lib/python3*/dist-packages/silero_vad/data/silero_vad.onnx")
+        sess = onnxruntime.InferenceSession(model[0])
+    except (ImportError, IndexError):
+        return None
+    cmd = ["ffmpeg", "-nostdin", "-v", "error"]
+    if start is not None:
+        cmd += ["-ss", str(start), "-t", str(dur)]
+    cmd += ["-i", path, "-map", "0:a:0", "-ac", "1", "-ar", "16000",
+            "-af", "highpass=f=80", "-f", "s16le", "-"]
+    raw = subprocess.run(cmd, stdout=subprocess.PIPE, check=True).stdout
+    x = np.frombuffer(raw, np.int16).astype(np.float32) / 32768
+    state = np.zeros((2, 1, 128), np.float32)
+    ctx = np.zeros(64, np.float32)
+    sr = np.array(16000, np.int64)
+    probs = []
+    for i in range(0, len(x) - VAD_CHUNK, VAD_CHUNK):
+        c = x[i:i + VAD_CHUNK]
+        out, state = sess.run(None, {"input": np.concatenate([ctx, c])[None],
+                                     "state": state, "sr": sr})
+        ctx = c[-64:]
+        probs.append(float(out[0, 0]))
+    return probs
+
+
+def plan_cuts(gaps, thr, total, vad):
     """Return (removals, flagged) in source-relative seconds."""
     removals, flagged = [], []
     for s, e, peak in gaps:
         g = e - s
-        keep = PAD_BEFORE_CUT + PAD_AFTER_CUT + (LONG_GAP_EXTRA if g >= LONG_GAP else 0)
-        if s <= 0.0 or e >= total - WINDOW:
-            # leading/trailing silence: keep a short natural head/tail
-            keep = 0.5
-        cs, ce = s + PAD_BEFORE_CUT, e - PAD_AFTER_CUT
+        extra = LONG_GAP_EXTRA if g >= LONG_GAP else 0.0
+        cs, ce = s + PAD_BEFORE_CUT + extra, e - PAD_AFTER_CUT
         if s <= 0.0:
+            # leading silence: keep a short natural head
             cs, ce = 0.0, e - 0.5
         elif e >= total - WINDOW:
+            # trailing silence: keep a short natural tail
             cs, ce = s + 0.5, total
+        keep = g - (ce - cs)
         if ce - cs < MIN_REMOVAL:
             continue
-        # borderline content inside the gap (soft speech / mumble / trailing
-        # word) -> don't cut, flag it
-        if peak > thr - 3.0:
+        # anything the voice detector thinks might be speech inside the part
+        # we'd remove (soft word, mumble, trailing syllable) -> keep and flag
+        if vad is not None:
+            a, b = int(cs / VAD_STEP), int(ce / VAD_STEP) + 1
+            p = max(vad[a:b], default=0.0)
+            if p >= VAD_SPEECH:
+                flagged.append((s, e, peak, f"possible speech inside pause (VAD {p:.2f})"))
+                continue
+        elif peak > thr - 3.0:
             flagged.append((s, e, peak, "low-level sound inside gap; may be quiet speech"))
             continue
         removals.append((cs, ce, s, e, g, keep))
@@ -164,8 +209,12 @@ def keep_segments(removals, total, fps):
 
 def audio_chain(floor_db):
     nf = max(-80, min(-20, round(floor_db)))
-    return ("highpass=f=70:p=2,"
+    # afftdn delays its output by AFFTDN_LATENCY samples at 48 kHz; trim that
+    # off the front and pad the end so lip-sync and duration are unchanged
+    return ("aresample=48000,highpass=f=70:p=2,"
             f"afftdn=nr=10:nf={nf}:tn=1:om=o,"
+            f"atrim=start_sample={AFFTDN_LATENCY},asetpts=PTS-STARTPTS,"
+            f"apad=pad_len={AFFTDN_LATENCY},"
             "adeclick=w=55:o=75:a=2:t=8,"
             "equalizer=f=250:t=q:w=1.0:g=-1.5,"
             "equalizer=f=3500:t=q:w=1.2:g=1.5,"
@@ -222,7 +271,10 @@ def main():
 
     levels = rms_series(src, start, total)
     gaps, floor, speech, thr = find_gaps(levels)
-    removals, flagged = plan_cuts(gaps, thr, total)
+    vad = silero_probs(src, start, total)
+    if vad is None:
+        print("WARNING: Silero VAD unavailable; falling back to energy-only uncertainty check")
+    removals, flagged = plan_cuts(gaps, thr, total, vad)
     segs = keep_segments(removals, total, fps)
     off = start or 0.0
 
