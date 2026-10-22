@@ -1,0 +1,255 @@
+{
+ "note": "Approved high-confidence retakes only. Held for review: R6, R8, R12 (off-camera), R14, R15, R20, R25, R31.",
+ "head_before_word": 0,
+ "remove": [
+  {
+   "id": "R2",
+   "words": [
+    17,
+    107
+   ],
+   "reason": "five aborted intro takes; keep 1:06.8 take"
+  },
+  {
+   "id": "R3+R4",
+   "words": [
+    209,
+    239
+   ],
+   "reason": "restarted sentence, 'Okay, good one', first 'thirty next year' take, 'I'm going to' stutter"
+  },
+  {
+   "id": "R5",
+   "words": [
+    290,
+    293
+   ],
+   "reason": "'Okay. So first... Uh' (replaced by title card)"
+  },
+  {
+   "id": "R7",
+   "words": [
+    438,
+    445
+   ],
+   "reason": "'Don't be completely depend on anyone. Dependent on' restart"
+  },
+  {
+   "id": "R9",
+   "words": [
+    460,
+    470
+   ],
+   "reason": "two restarts of 'From childhood we have seen movies'"
+  },
+  {
+   "id": "R10",
+   "words": [
+    486,
+    503
+   ],
+   "reason": "restarts of 'As women, we are often told'"
+  },
+  {
+   "id": "R11",
+   "words": [
+    593,
+    609
+   ],
+   "reason": "'because. It is up here to change this narrative. So that you don't wait. For someone to' restart"
+  },
+  {
+   "id": "R13",
+   "words": [
+    718,
+    725
+   ],
+   "reason": "'Okay. Second I would like to see is' restart"
+  },
+  {
+   "id": "F1",
+   "words": [
+    854,
+    854
+   ],
+   "reason": "isolated filler 'Uh'"
+  },
+  {
+   "id": "R16",
+   "words": [
+    898,
+    908
+   ],
+   "reason": "first take of 'so much creativity inside you'"
+  },
+  {
+   "id": "R17",
+   "words": [
+    927,
+    933
+   ],
+   "reason": "first 'the thing that can help you is'"
+  },
+  {
+   "id": "F2",
+   "words": [
+    952,
+    952
+   ],
+   "reason": "filler 'um' mid-list"
+  },
+  {
+   "id": "R18",
+   "words": [
+    1044,
+    1051
+   ],
+   "reason": "'Is it just uh it j is it' stutter"
+  },
+  {
+   "id": "R19",
+   "words": [
+    1109,
+    1116
+   ],
+   "reason": "'Next is the / We have people around us.' restart (title card)"
+  },
+  {
+   "id": "R21",
+   "words": [
+    1244,
+    1247
+   ],
+   "reason": "'Often what happens is' restart"
+  },
+  {
+   "id": "R22",
+   "words": [
+    1276,
+    1276
+   ],
+   "reason": "doubled 'So'"
+  },
+  {
+   "id": "R23",
+   "words": [
+    1325,
+    1332
+   ],
+   "reason": "repeated 'you would know if that advice suits you'"
+  },
+  {
+   "id": "R24",
+   "words": [
+    1342,
+    1355
+   ],
+   "reason": "'Um / And whatever we have discussed... needs to / And whatever' restarts"
+  },
+  {
+   "id": "R26",
+   "words": [
+    1476,
+    1489
+   ],
+   "reason": "'Sometimes even what? Okay. So even basic even for and it and continuing so,'"
+  },
+  {
+   "id": "R27",
+   "words": [
+    1527,
+    1530
+   ],
+   "reason": "'Mm-hmm. So that and'"
+  },
+  {
+   "id": "R28",
+   "words": [
+    1544,
+    1546
+   ],
+   "reason": "'Sometimes your decision,' restart"
+  },
+  {
+   "id": "R29",
+   "words": [
+    1650,
+    1658
+   ],
+   "reason": "'So learn learn decision making. It is a / So' restart"
+  },
+  {
+   "id": "R30",
+   "words": [
+    1704,
+    1708
+   ],
+   "reason": "'Obviously, take advice and the' restart"
+  },
+  {
+   "id": "R32",
+   "words": [
+    1764,
+    1765
+   ],
+   "reason": "first 'That's it.'"
+  },
+  {
+   "id": "R33",
+   "words": [
+    1771,
+    1791
+   ],
+   "reason": "first take of 'I hope you have a great life...'"
+  },
+  {
+   "id": "R34",
+   "words": [
+    1827,
+    1827
+   ],
+   "reason": "trailing 'Okay.' and tail"
+  }
+ ],
+ "inserts": [
+  {
+   "name": "chapter_menu",
+   "dur": 6.0,
+   "before_word": 294
+  },
+  {
+   "name": "title_1",
+   "dur": 3.0,
+   "before_word": 294,
+   "title": "Don't Wait to Be Rescued"
+  },
+  {
+   "name": "title_2",
+   "dur": 3.0,
+   "before_word": 726,
+   "title": "Take Control of Your Finances"
+  },
+  {
+   "name": "title_3",
+   "dur": 3.0,
+   "before_word": 845,
+   "title": "Build Happiness and Creative Outlets"
+  },
+  {
+   "name": "title_4",
+   "dur": 3.0,
+   "before_word": 1117,
+   "title": "Know Yourself"
+  },
+  {
+   "name": "title_5",
+   "dur": 3.0,
+   "before_word": 1371,
+   "title": "Make Better Decisions"
+  },
+  {
+   "name": "end_screen",
+   "dur": 10.0
+  }
+ ]
+}
