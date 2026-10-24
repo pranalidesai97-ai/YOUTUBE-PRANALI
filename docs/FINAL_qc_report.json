@@ -1,0 +1,219 @@
+{
+ "file": "/tmp/claude-0/-home-user-YOUTUBE-PRANALI/286ac342-9da4-571b-b536-e601329738e9/scratchpad/final/Lessons_from_my_twenties_FINAL_1080p30.mp4",
+ "size_bytes": 498491992,
+ "video": {
+  "codec_name": "h264",
+  "profile": "High",
+  "level": 50,
+  "width": 1920,
+  "height": 1080,
+  "sample_aspect_ratio": "1:1",
+  "display_aspect_ratio": "16:9",
+  "pix_fmt": "yuv420p",
+  "r_frame_rate": "30/1",
+  "avg_frame_rate": "30/1",
+  "nb_frames": "19577",
+  "duration": "652.566667",
+  "bit_rate": "5850233",
+  "color_space": "bt709",
+  "color_primaries": "bt709",
+  "color_transfer": "bt709",
+  "color_range": "tv"
+ },
+ "audio": {
+  "codec_name": "aac",
+  "profile": "LC",
+  "sample_rate": "48000",
+  "channels": 2,
+  "channel_layout": "stereo",
+  "bit_rate": "252098",
+  "duration": "652.566000"
+ },
+ "format_duration": 652.566667,
+ "expected_duration": 652.5666666666668,
+ "expected_frames": 19577,
+ "x264": {
+  "crf": "16.0",
+  "rc": "crf",
+  "keyint": "60",
+  "ref": "5",
+  "subme": "8",
+  "me": "hex",
+  "bframes": "3"
+ },
+ "faststart": true,
+ "decode_errors": [],
+ "black": [],
+ "freezes": [
+  {
+   "start": 63.8667,
+   "end": 69.8667,
+   "explained_by": "chapter_menu"
+  },
+  {
+   "start": 69.8667,
+   "end": 72.8667,
+   "explained_by": "title_1"
+  },
+  {
+   "start": 223.567,
+   "end": 226.567,
+   "explained_by": "title_2"
+  },
+  {
+   "start": 285.067,
+   "end": 288.067,
+   "explained_by": "title_3"
+  },
+  {
+   "start": 293.933,
+   "end": 295.367,
+   "explained_by": null
+  },
+  {
+   "start": 297.9,
+   "end": 298.933,
+   "explained_by": null
+  },
+  {
+   "start": 389.967,
+   "end": 392.967,
+   "explained_by": "title_4"
+  },
+  {
+   "start": 475.133,
+   "end": 478.133,
+   "explained_by": "title_5"
+  },
+  {
+   "start": 520.667,
+   "end": 522.433,
+   "explained_by": null
+  },
+  {
+   "start": 522.733,
+   "end": 523.767,
+   "explained_by": null
+  },
+  {
+   "start": 523.767,
+   "end": 524.8,
+   "explained_by": null
+  },
+  {
+   "start": 642.567,
+   "end": 652.566667,
+   "explained_by": "end_screen"
+  }
+ ],
+ "loudness": {
+  "I_LUFS": -16.0,
+  "LRA": 4.3,
+  "true_peak_dBFS": -1.5
+ },
+ "audio_dropouts_below_-55dB_over_0.25s": [],
+ "sync": [
+  {
+   "output_t": 3.2,
+   "picture_offset_frames": 0,
+   "audio_offset_ms": 0.0,
+   "audio_corr": 0.92
+  },
+  {
+   "output_t": 78.37,
+   "picture_offset_frames": 1,
+   "audio_offset_ms": 0.2,
+   "audio_corr": 0.95
+  },
+  {
+   "output_t": 138.13,
+   "picture_offset_frames": -1,
+   "audio_offset_ms": 0.2,
+   "audio_corr": 0.89
+  },
+  {
+   "output_t": 191.4,
+   "picture_offset_frames": -1,
+   "audio_offset_ms": 0.0,
+   "audio_corr": 0.92
+  },
+  {
+   "output_t": 230.8,
+   "picture_offset_frames": -1,
+   "audio_offset_ms": 0.2,
+   "audio_corr": 0.95
+  },
+  {
+   "output_t": 299.92,
+   "picture_offset_frames": 0,
+   "audio_offset_ms": 0.0,
+   "audio_corr": 0.93
+  },
+  {
+   "output_t": 342.17,
+   "picture_offset_frames": 1,
+   "audio_offset_ms": 0.0,
+   "audio_corr": 0.91
+  },
+  {
+   "output_t": 418.37,
+   "picture_offset_frames": 0,
+   "audio_offset_ms": 0.0,
+   "audio_corr": 0.9
+  },
+  {
+   "output_t": 464.92,
+   "picture_offset_frames": 0,
+   "audio_offset_ms": -0.5,
+   "audio_corr": 0.81
+  },
+  {
+   "output_t": 532.45,
+   "picture_offset_frames": 0,
+   "audio_offset_ms": -0.2,
+   "audio_corr": 0.92
+  },
+  {
+   "output_t": 579.4,
+   "picture_offset_frames": -1,
+   "audio_offset_ms": -0.5,
+   "audio_corr": 0.91
+  },
+  {
+   "output_t": 631.23,
+   "picture_offset_frames": 0,
+   "audio_offset_ms": -0.2,
+   "audio_corr": 0.93
+  }
+ ],
+ "sheets": {
+  "start_end": "/tmp/claude-0/-home-user-YOUTUBE-PRANALI/286ac342-9da4-571b-b536-e601329738e9/scratchpad/final/qc_final/qc_start_end.jpg",
+  "transitions": "/tmp/claude-0/-home-user-YOUTUBE-PRANALI/286ac342-9da4-571b-b536-e601329738e9/scratchpad/final/qc_final/qc_chapter_transitions.jpg",
+  "broll": "/tmp/claude-0/-home-user-YOUTUBE-PRANALI/286ac342-9da4-571b-b536-e601329738e9/scratchpad/final/qc_final/qc_broll_inserts.jpg",
+  "graphics": "/tmp/claude-0/-home-user-YOUTUBE-PRANALI/286ac342-9da4-571b-b536-e601329738e9/scratchpad/final/qc_final/qc_graphics.jpg",
+  "throughout": "/tmp/claude-0/-home-user-YOUTUBE-PRANALI/286ac342-9da4-571b-b536-e601329738e9/scratchpad/final/qc_final/qc_every_minute.jpg",
+  "hindi_captions": "/tmp/claude-0/-home-user-YOUTUBE-PRANALI/286ac342-9da4-571b-b536-e601329738e9/scratchpad/final/qc_final/qc_hindi_captions.png"
+ },
+ "hindi_cues": [
+  [
+   "काश मुझे किसी ने पहले बता",
+   78.809
+  ],
+  [
+   "दिया होता, तो मैं अलग चीज़ें",
+   80.81700000000001
+  ],
+  [
+   "करती।",
+   82.825
+  ],
+  [
+   "Prince Charming आके हमें बचाएगा,",
+   154.376
+  ],
+  [
+   "but ऐसा नहीं होता।",
+   156.243
+  ]
+ ]
+}

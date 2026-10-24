@@ -22,7 +22,7 @@ SPELL = {"20s": "twenties", "20s.": "twenties.", "20s,": "twenties,", "30s": "th
 FILLERS = {"uh", "um", "uh,", "um,", "mm-hmm.", "mm-hmm", "uh.", "um."}
 FRAGMENT = re.compile(r"^[a-z]{1,2}$")   # cut-off word starts ("tr", "ev", "j")
 REAL_SHORT = {"a", "i", "is", "it", "in", "on", "to", "of", "or", "so", "be", "we", "my", "me", "do",
-              "no", "go", "up", "as", "at", "an", "if", "us", "he", "by", "am"}
+              "no", "go", "up", "as", "at", "an", "if", "us", "he", "by", "am", "hi"}
 GAP_BREAK = 0.35
 LINGER = 0.30
 ONSET_SLACK = 0.08    # see to_output()

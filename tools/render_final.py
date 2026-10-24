@@ -323,8 +323,14 @@ def main():
             cur = []
     if cur:
         chunks.append(cur)
+    # RERENDER="0,5" re-renders only those chunks and reuses the others already in the work dir
+    only = {int(x) for x in os.environ.get("RERENDER", "").split(",") if x.strip()}
     parts = []
     for n, ch in enumerate(chunks):
+        done = os.path.join(work, f"c{n:03d}.mp4")
+        if only and n not in only and os.path.exists(done):
+            parts.append(done)
+            continue
         print(f"chunk {n + 1}/{len(chunks)}  {ch[0]['out_start']:.1f}s", flush=True)
         parts.append(render_chunk(n, ch, overlays, cues, hidden, None, src, font_dir, man["pip_mask"], work))
     lst = os.path.join(work, "parts.txt")
@@ -333,10 +339,14 @@ def main():
     total = t1 - t0
     cards = [c for c in items if c["type"] == "card"]
     # the music fades out over the last 3 s when the render reaches the end of the edit
-    audio, events = build_audio(src, items, overlays, cards, audio_dir, work, total, t0,
-                                fade_out=abs(t1 - edl["duration"]) < 0.01)
+    if only and os.path.exists(os.path.join(work, "mix_final.wav")):   # audio unchanged: reuse it
+        audio, events = os.path.join(work, "mix_final.wav"), json.load(open(out + ".render.json"))["sfx_events"]
+    else:
+        audio, events = build_audio(src, items, overlays, cards, audio_dir, work, total, t0,
+                                    fade_out=abs(t1 - edl["duration"]) < 0.01)
     ff(["-f", "concat", "-safe", "0", "-i", lst, "-i", audio, "-map", "0:v", "-map", "1:a", "-c:v", "copy",
-        "-c:a", "aac", "-b:a", "256k", "-ar", "48000", "-movflags", "+faststart", "-shortest", out])
+        "-c:a", "aac", "-b:a", "256k", "-ar", "48000", "-movflags", "+faststart", out])
+    # (no -shortest: it drops the last few video frames; both streams are already the same length)
     json.dump({"window": [t0, t1], "sfx_events": events,
                "jump_framing": [it["out_start"] for it in items if it.get("jump")]},
               open(out + ".render.json", "w"), indent=1)
