@@ -1,9 +1,23 @@
-# Caption flags for review (stage 2) - updated after review round 2
+# Caption flags for review (stage 2) - updated after review round 3
 
 - **Times:** "Output" times are in the current edit (10:53.9); "source" times are in your original recording. The per-item detail below keeps the cue numbers from round 1. After cue 241, current numbers are one lower.
 - **Cue numbers:** these refer to `docs/stage2_captions.srt`.
 - **Status:** nothing here has been resolved silently. Every cue below keeps its current text until you choose an option or type a correction.
 - **How to reply:** for example, "37–39: A", "71: B", "138: type 'Third is'".
+
+## Round 3 decisions (applied)
+
+| Item | Answer | Caption now | Status |
+|---|---|---|---|
+| 1 | Yes | काश **मुझे** किसी ने पहले बता दिया होता, तो मैं अलग चीज़ें करती। | confirmed |
+| 2 | B | As a kid also, / … Prince Charming will come to / rescue you. | applied (now 3 cues instead of 4) |
+| 3 | B | **not applied:** "B" is ambiguous. This document listed B = "be your own pillar", but the clip label listed B = "be your pillar". | **open, cue 68** (renumbered) |
+| 5 | B | some or the other way. | applied |
+| 7 | B | Third is, | applied |
+| 9 | B | Very early. (capitalised because the previous caption ends a sentence; audio untouched) | applied |
+| 11 | B | your great twenties. | applied |
+
+**Cue numbers:** after round 3 the SRT has 320 cues. Numbers after item 2 are one lower again, and after old cue 242 two lower in total. The item detail below keeps the round-1 numbering.
 
 ## Round 2 decisions (applied)
 
