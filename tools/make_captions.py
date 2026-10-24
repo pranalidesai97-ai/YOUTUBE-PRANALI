@@ -74,10 +74,12 @@ def main():
             r = repl[k]
             i, j = r["words"]
             end = to_output(W[j]["end"] - 0.01, segs) or t + 0.6 * (j - i + 1)
-            words = r["text"].split()
+            words = r["text"].split()   # empty text = hidden from captions only (audio untouched)
             step = (end - t) / max(1, len(words))
+            only = r.get("flag_words")   # flag just these words of an otherwise accepted line
             for n, x in enumerate(words):
-                toks.append([x, t + n * step, t + (n + 1) * step, r.get("flag", "")])
+                f = r.get("flag", "") if (only is None or x.strip(",.?!।") in only) else ""
+                toks.append([x, t + n * step, t + (n + 1) * step, f])
             continue
         bare = w["w"].lower()
         if bare in FILLERS or (FRAGMENT.match(bare) and bare not in REAL_SHORT):

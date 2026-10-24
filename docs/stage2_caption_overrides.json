@@ -1,5 +1,5 @@
 {
- "note": "UTF-8. Hindi speech in Devanagari, English in English, never translated. Hindi text is cross-checked across Whisper-medium (Hindi), Whisper (English mode) and Parakeet; every Hindi word stays flagged until confirmed by the speaker.",
+ "note": "UTF-8. Hindi speech in Devanagari, English in English, never translated. Speaker decisions of the caption review are recorded per entry ('decision'); unresolved items stay flagged.",
  "replace": [
   {
    "words": [
@@ -7,7 +7,11 @@
     327
    ],
    "text": "काश मुझे किसी ने पहले बता दिया होता, तो मैं अलग चीज़ें करती।",
-   "flag": "Hindi, cross-checked: 'तो मैं अलग चीज़े करती' heard twice by Whisper-medium; 'काश… किसी ने… पहले बता दिया होता' supported by Parakeet ('ka sha… kisi na… ta diya auta') and Whisper ('Pahele Bata'); 'मुझे' least certain"
+   "flag": "Item 1: sentence kept provisionally by the speaker; 'मुझे' awaits listening-based confirmation",
+   "flag_words": [
+    "मुझे"
+   ],
+   "decision": "keep provisionally; flag मुझे"
   },
   {
    "words": [
@@ -15,7 +19,7 @@
     485
    ],
    "text": "Prince Charming आके हमें बचाएगा, but ऐसा नहीं होता।",
-   "flag": "Hindi, cross-checked: Whisper-medium 'प्रिंश शामिंग के हमें बच्छा आएगा', Parakeet 'charming a key hammer, but as a nahi hotta'; verb uncertain: 'बचाएगा' or 'बचाने आएगा'"
+   "decision": "confirmed by speaker (item 4)"
   },
   {
    "words": [
@@ -23,7 +27,23 @@
     1060
    ],
    "text": "Netflix?",
-   "flag": "heard as 'At Witz' / '...flix' - probably 'Netflix?'"
+   "decision": "confirmed by speaker (item 8)"
+  },
+  {
+   "words": [
+    819,
+    820
+   ],
+   "text": "",
+   "decision": "item 6: 'a person.' removed from caption only; audio untouched"
+  },
+  {
+   "words": [
+    1393,
+    1393
+   ],
+   "text": "",
+   "decision": "item 10: 'Oh.' removed from caption only; audio untouched"
   }
  ],
  "flag": [
@@ -32,35 +52,42 @@
     383,
     395
    ],
-   "note": "R6 (kept): Parakeet 'I think we'll have to come to the kingdom'; Whisper heard 'Prince Charming will come (to) rescue you' - suggestion: '…Prince Charming will come to rescue you.'"
+   "note": "Item 2 (R6) unresolved: Parakeet 'I think we'll have to come to the kingdom'; Whisper '…Prince Charming will come (to) rescue you'"
   },
   {
    "words": [
     456,
     458
    ],
-   "note": "R8 (kept): 'be your pillow' - maybe 'be your own pillar'?"
+   "note": "Item 3 (R8) unresolved: 'pillow' / 'pillar' / 'your own pillar'"
   },
   {
    "words": [
-    819,
-    820
+    776,
+    778
    ],
-   "note": "'a person.' - false start before 'personal financing'?"
+   "note": "Item 5 unresolved: 'somewhat other way' / 'some or the other way' / 'some other way'"
   },
   {
    "words": [
     845,
     845
    ],
-   "note": "R14 (kept): 'Tourism' - probably 'Third is'? (second recogniser: 'TODISM')"
+   "note": "Item 7 (R14) unresolved: 'Tourism' / 'Third is'"
   },
   {
    "words": [
     1297,
     1298
    ],
-   "note": "'Very oddly' - probably 'very early'?"
+   "note": "Item 9 unresolved: 'Very oddly' / 'very early'"
+  },
+  {
+   "words": [
+    1799,
+    1803
+   ],
+   "note": "Item 11 unresolved: 'you have great 20 years' / 'your great twenties'"
   }
  ]
 }

@@ -1,11 +1,43 @@
-# Caption flags for review (stage 2)
+# Caption flags for review (stage 2) - updated after review round 2
 
-- **Times:** "Output" times are in the current edit (10:53.9); "source" times are in your original recording.
+- **Times:** "Output" times are in the current edit (10:53.9); "source" times are in your original recording. The per-item detail below keeps the cue numbers from round 1. After cue 241, current numbers are one lower.
 - **Cue numbers:** these refer to `docs/stage2_captions.srt`.
 - **Status:** nothing here has been resolved silently. Every cue below keeps its current text until you choose an option or type a correction.
 - **How to reply:** for example, "37–39: A", "71: B", "138: type 'Third is'".
 
-## Needs your confirmation: 16 cues
+## Round 2 decisions (applied)
+
+| Item | Cue(s) | Decision | Status |
+|---|---|---|---|
+| 1 | 37–39 | keep sentence provisionally | **मुझे** still flagged |
+| 2 | 53–56 | — | unresolved |
+| 3 | 69 | — | unresolved |
+| 4 | 71–72 | keep | confirmed |
+| 5 | 121 | — | unresolved |
+| 6 | 130 | drop "a person." from caption | applied (audio untouched) |
+| 7 | 138 | — | unresolved |
+| 8 | 182 | keep "Netflix?" | confirmed |
+| 9 | 226 | — | unresolved |
+| 10 | 242 (old) | drop "Oh." from caption | applied (audio untouched); later cues renumbered −1 |
+| 11 | 315 (was 316) | — | unresolved |
+
+## Listening clips (original audio, untouched)
+
+- **What each clip is:** the original recording, from 1.5 s before to 1.5 s after the uncertain words. It is re-encoded at 720p for the tablet, with AAC 256 kb/s audio decoded from the original with no processing.
+- **On screen:** a label shows the item and its options; "● flagged words now" appears while the uncertain words are spoken.
+- **All at once:** `listening_clips_all.mp4` plays all seven back to back.
+
+| Clip | Item | Words (as recognised) | Source time | Output time | Clip covers source |
+|---|---|---|---|---|---|
+| `item01_cues37-39_mujhe.mp4` | Item 1 · cues 37–39 · 'मुझे' | ka sha macha kisi na pai laba ta diya auta to me alak chi sa karati. | 2:45.5 | 1:18.6 | 164.03–171.19 s |
+| `item02_cues53-56_R6.mp4` | Item 2 · cues 53–56 · R6 | As a kid, also, I think we'll have to come to the kingdom. | 3:20.1 | 1:50.6 | 198.60–206.32 s |
+| `item03_cue69_R8.mp4` | Item 3 · cue 69 · R8 | Okay, be your pillow. | 4:08.9 | 2:28.1 | 247.40–252.44 s |
+| `item05_cue121.mp4` | Item 5 · cue 121 | your life in somewhat other way. | 7:01.0 | 4:06.4 | 419.48–424.56 s |
+| `item07_cue138_R14.mp4` | Item 7 · cue 138 · R14 | Tourism. | 7:48.7 | 4:48.3 | 467.19–470.99 s |
+| `item09_cue226.mp4` | Item 9 · cue 226 | Very oddly. | 11:26.4 | 7:38.1 | 684.87–688.73 s |
+| `item11_cue315_was316.mp4` | Item 11 · cue 315 (was 316) | you have great 20 years. | 16:05.7 | 10:31.2 | 964.22–968.98 s |
+
+## Item detail (round 1; 10 cues in 7 items remain open: 37 (मुझे only), 53–56, 69, 121, 138, 226, 315)
 
 | # | Cues | Output | Source |
 |---|---|---|---|
@@ -22,6 +54,9 @@
 | 11 | 316 | 00:10:31 | 16:06.1 |
 
 ### 1. Cues 37, 38, 39: Hindi sentence (Hinglish passage 1)
+
+> **Decision:** keep the sentence provisionally; **मुझे stays flagged** for listening-based confirmation (clip: `item01_cues37-39_mujhe.mp4`).
+
 - **Output time:** 00:01:18
 - **Source time:** ≈2:45.5
 
@@ -50,6 +85,9 @@ Caption now: **काश मुझे किसी ने पहले बता
 - Also possible: चीज़ें vs चीज़
 
 ### 2. Cues 53, 54, 55, 56: R6 (kept for your review)
+
+> **Decision:** unresolved, unchanged (clip: `item02_cues53-56_R6.mp4`).
+
 - **Output time:** 00:01:50
 - **Source time:** ≈3:20.0
 
@@ -77,6 +115,9 @@ Caption now: **काश मुझे किसी ने पहले बता
 - **C:** you type the line as you said it
 
 ### 3. Cue 69: R8 (kept for your review)
+
+> **Decision:** unresolved between pillow / pillar / your own pillar, unchanged (clip: `item03_cue69_R8.mp4`).
+
 - **Output time:** 00:02:28
 - **Source time:** ≈4:09.3
 
@@ -102,6 +143,9 @@ Both recognisers independently heard "pillow", so the sound is close to that wor
 - **C:** "Okay, be your pillar."
 
 ### 4. Cue 71: Hindi sentence (Hinglish passage 2)
+
+> **Decision: confirmed.** Keep "Prince Charming आके हमें बचाएगा," followed by "but ऐसा नहीं होता।" (flag cleared).
+
 - **Output time:** 00:02:34
 - **Source time:** ≈4:24.3
 
@@ -128,6 +172,9 @@ Caption now: **Prince Charming आके हमें बचाएगा,** / ne
 - Also unclear: whether a "ki/कि" comes before "Prince"
 
 ### 5. Cue 121: Finances sentence
+
+> **Decision:** unresolved until the audio is checked, unchanged (clip: `item05_cue121.mp4`).
+
 - **Output time:** 00:04:07
 - **Source time:** ≈7:02.1
 
@@ -151,6 +198,9 @@ Caption now: **Prince Charming आके हमें बचाएगा,** / ne
 - **C:** "in some other way"
 
 ### 6. Cue 130: Finances list
+
+> **Decision: applied.** "a person." removed from the caption only; audio untouched. The cue now reads "stock market," and the next cue reads "personal financing." (lowercase only because the sentence no longer ends before it).
+
 - **Output time:** 00:04:24
 - **Source time:** ≈7:19.1
 
@@ -175,6 +225,9 @@ Both recognisers heard "a person.", so something like it was spoken. Whether it'
 - **B:** drop "a person." from the caption only (it sounds like a false start of "personal"; the audio stays as is)
 
 ### 7. Cue 138: R14 (kept for your review)
+
+> **Decision:** unresolved between Tourism / Third is, unchanged (clip: `item07_cue138_R14.mp4`).
+
 - **Output time:** 00:04:48
 - **Source time:** ≈7:48.9
 
@@ -198,6 +251,9 @@ Both recognisers heard "a person.", so something like it was spoken. Whether it'
 - **C:** remove this caption
 
 ### 8. Cue 182: Scrolling question
+
+> **Decision: confirmed.** Keep "Netflix?" (flag cleared).
+
 - **Output time:** 00:06:12
 - **Source time:** ≈9:37.6
 
@@ -220,6 +276,9 @@ Both recognisers heard "a person.", so something like it was spoken. Whether it'
 - **B:** you type the word
 
 ### 9. Cue 226: Know-your-values sentence
+
+> **Decision:** unresolved between Very oddly / very early, unchanged (clip: `item09_cue226.mp4`).
+
 - **Output time:** 00:07:38
 - **Source time:** ≈11:26.8
 
@@ -244,6 +303,9 @@ Both recognisers heard "very oddly". "Very early" is only my reading of the sens
 - **B:** "very early." (fits "implement them in your life very early")
 
 ### 10. Cue 242: R25 (kept for your review)
+
+> **Decision: applied.** "Oh." removed from the caption only; audio untouched. That cue no longer exists, so **every later cue number is one lower** than before (old 316 = new 315).
+
 - **Output time:** 00:08:09
 - **Source time:** ≈12:21.0
 
@@ -266,6 +328,9 @@ Both recognisers heard "very oddly". "Very early" is only my reading of the sens
 - **B:** drop "Oh." from the caption only (it may be a sound, not a word)
 
 ### 11. Cue 316: Closing line
+
+> **Decision:** unresolved until the closing audio is checked, unchanged (clip: `item11_cue315_was316.mp4`). This is now **cue 315** (was 316).
+
 - **Output time:** 00:10:31
 - **Source time:** ≈16:06.1
 
