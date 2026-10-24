@@ -220,7 +220,7 @@ def quote_layer(text):
       padding-bottom:110px"><div>{_bold(text)}</div></div>""")
 
 
-PIP_BOX = (1180, 110, 620, 827)   # x, y, w, h of the speaker picture-in-picture
+PIP_BOX = (1180, 110, 620, 826)   # x, y, w, h of the speaker picture-in-picture (even sizes for 4:2:0)
 
 
 def pip_layers(heading, bullets):

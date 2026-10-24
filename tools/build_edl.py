@@ -28,6 +28,7 @@ HEAD_KEEP = 0.08      # silence kept before speech resumes
 PAUSE_MID = 0.20      # tightened pause inside a sentence
 PAUSE_END = 0.30      # tightened pause after . ? !
 MIN_PAUSE = 0.35      # shorter pauses are left as they are
+EDGE_MARGIN = 0.04    # keep cut edges this far from removed-word onsets
 VAD_GUARD = 0.35      # any frame this speech-like inside a pause -> leave it alone
 
 
@@ -75,6 +76,15 @@ class Audio:
             k -= HOP
         return self.quietest(limit, t)
 
+    def has_gap(self, a, b):
+        """True if [a, b] contains >= 60 ms of continuous quiet."""
+        k = a
+        while k + 0.06 <= b:
+            if all(self.quiet(k + d * HOP) for d in range(6)):
+                return True
+            k += HOP
+        return False
+
     def quietest(self, a, b):
         i, j = int(a / HOP), max(int(a / HOP) + 1, int(b / HOP))
         return (i + int(np.argmin(self.db[i:j]))) * HOP
@@ -116,6 +126,13 @@ def main():
             a = min(a + TAIL_KEEP * scale, b)
         if nxt_start is not None:
             b = max(b - HEAD_KEEP * scale, a)
+        # never keep the onset of a removed word (margin survives frame snapping)
+        if prev_start is not None:
+            a = min(a, W[i]["start"] - EDGE_MARGIN)
+        # no pause before the next kept word (continuous speech): cut right up to it,
+        # otherwise the tail of the last removed word survives
+        if nxt_start is not None and not au.has_gap(W[j]["start"] + 0.05, nxt_start):
+            b = au.quietest(W[j]["start"] + 0.06, nxt_start + 0.03)   # the dip between the two words
         removals.append({"id": r["id"], "start": a, "end": b, "reason": r["reason"],
                          "text": " ".join(w["w"] for w in W[i:j + 1])})
     if spec.get("head_before_word") is not None:

@@ -25,6 +25,7 @@ REAL_SHORT = {"a", "i", "is", "it", "in", "on", "to", "of", "or", "so", "be", "w
               "no", "go", "up", "as", "at", "an", "if", "us", "he", "by", "am"}
 GAP_BREAK = 0.35
 LINGER = 0.30
+ONSET_SLACK = 0.08    # see to_output()
 
 
 def srt_time(t):
@@ -39,6 +40,11 @@ def to_output(t, segs):
     for s in segs:
         if s["in"] <= t < s["out"]:
             return s["out_start"] + t - s["in"]
+    # word timestamps come in 80 ms steps: a kept word may be stamped just before the
+    # cut point where its audio actually begins
+    for s in segs:
+        if 0 < s["in"] - t <= ONSET_SLACK:
+            return s["out_start"]
     return None
 
 

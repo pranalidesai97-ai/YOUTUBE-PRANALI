@@ -27,6 +27,9 @@ def main():
         for s in segs:
             if s["in"] <= t < s["out"]:
                 return s["out_start"] + t - s["in"]
+        for s in segs:   # word stamped just before the cut point where its audio begins
+            if 0 < s["in"] - t <= 0.08:
+                return s["out_start"]
         return None
 
     def find(anchor):

@@ -27,7 +27,7 @@ P,pause,4:06.814,4:07.584,0.77,1.07s -> 0.30s
 P,pause,4:08.144,4:08.514,0.37,0.67s -> 0.30s
 P,pause,4:11.132,4:13.032,1.90,2.20s -> 0.30s
 R9,two restarts of 'From childhood we have seen movies',4:13.986,4:21.126,7.14,From childhood we um from childhood we have seen movies. Um
-R10,"restarts of 'As women, we are often told'",4:27.486,4:44.610,17.12,"We often as women we are always told to do told As women, we are often told to"
+R10,"restarts of 'As women, we are often told'",4:27.486,4:44.730,17.24,"We often as women we are always told to do told As women, we are often told to"
 P,pause,5:13.406,5:13.576,0.17,0.47s -> 0.30s
 R11,'because. It is up here to change this narrative. So that you don't wait. For someone to' restart,5:16.926,5:38.418,21.49,because. It is up here to change this narrative. So that you don't wait. For someone to
 P,pause,5:41.758,5:41.838,0.08,0.38s -> 0.30s
@@ -69,7 +69,7 @@ P,pause,9:14.714,9:15.044,0.33,0.53s -> 0.20s
 P,pause,9:20.284,9:20.364,0.08,0.38s -> 0.30s
 P,pause,9:28.034,9:28.204,0.17,0.37s -> 0.20s
 P,pause,9:30.264,9:30.504,0.24,0.54s -> 0.30s
-R18,'Is it just uh it j is it' stutter,9:32.984,9:35.070,2.09,Is it just uh it j is it
+R18,'Is it just uh it j is it' stutter,9:32.984,9:35.230,2.25,Is it just uh it j is it
 P,pause,9:38.784,9:39.844,1.06,1.26s -> 0.20s
 P,pause,9:53.336,9:53.796,0.46,0.76s -> 0.30s
 R19,'Next is the / We have people around us.' restart (title card),9:56.826,10:05.470,8.64,Next is the We have people around us.
@@ -77,7 +77,7 @@ P,pause,10:16.800,10:17.080,0.28,0.48s -> 0.20s
 R20,redundant repeat 'It's just absolutely important for you to know yourself first and',10:28.730,10:34.710,5.98,It's just absolutely important for you to know yourself first and
 P,pause,10:39.580,10:39.670,0.09,0.39s -> 0.30s
 P,pause,10:46.012,10:46.462,0.45,0.75s -> 0.30s
-R21,'Often what happens is' restart,10:55.642,11:00.080,4.44,Often what happens is
+R21,'Often what happens is' restart,10:55.642,11:00.200,4.56,Often what happens is
 P,pause,11:02.318,11:02.508,0.19,0.39s -> 0.20s
 R22,doubled 'So',11:11.002,11:15.630,4.63,So
 P,pause,11:27.414,11:27.794,0.38,0.68s -> 0.30s
@@ -93,15 +93,15 @@ R26,"'Sometimes even what? Okay. So even basic even for and it and continuing so
 P,pause,13:28.704,13:29.174,0.47,0.67s -> 0.20s
 P,pause,13:33.498,13:34.338,0.84,1.14s -> 0.30s
 P,pause,13:37.694,13:38.074,0.38,0.68s -> 0.30s
-R27,'Mm-hmm. So that and',13:45.180,13:49.830,4.65,Mm-hmm. So that and
-R28,"'Sometimes your decision,' restart",13:53.950,13:55.940,1.99,"Sometimes your decision,"
+R27,'Mm-hmm. So that and',13:45.180,13:50.170,4.99,Mm-hmm. So that and
+R28,"'Sometimes your decision,' restart",13:53.870,13:56.090,2.22,"Sometimes your decision,"
 P,pause,14:00.340,14:00.590,0.25,0.55s -> 0.30s
 P,pause,14:21.174,14:21.354,0.18,0.48s -> 0.30s
 P,pause,14:25.154,14:25.764,0.61,0.81s -> 0.20s
-R29,'So learn learn decision making. It is a / So' restart,14:36.470,14:42.970,6.50,So learn learn decision making. It is a So
+R29,'So learn learn decision making. It is a / So' restart,14:36.470,14:43.140,6.67,So learn learn decision making. It is a So
 P,pause,14:54.776,14:57.266,2.49,2.79s -> 0.30s
 R30,"'Obviously, take advice and the' restart",15:02.230,15:08.414,6.18,"Obviously, take advice and the"
-R31,stutter/restart 'they know you. Better. They' -> 'they also know you better',15:15.970,15:21.730,5.76,they know you. Better. They
+R31,stutter/restart 'they know you. Better. They' -> 'they also know you better',15:15.854,15:21.840,5.99,they know you. Better. They
 R32,first 'That's it.',15:31.450,15:43.528,12.08,That's it.
 R33,first take of 'I hope you have a great life...',15:45.688,16:03.758,18.07,"I hope you have a great life, your great twenties and um whatever uh mistakes other people do I uh And"
 P,pause,16:10.558,16:11.158,0.60,0.90s -> 0.30s

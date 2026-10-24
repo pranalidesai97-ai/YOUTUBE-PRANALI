@@ -210,7 +210,7 @@ def render_chunk(n, items, overlays, cues, hidden, jumps, src, font_dir, mask, w
     return out
 
 
-def build_audio(src, items, overlays, cards, audio_dir, work, total, t_off):
+def build_audio(src, items, overlays, cards, audio_dir, work, total, t_off, fade_out=False):
     """Continuous audio for the whole (windowed) timeline."""
     tone = os.path.join(audio_dir, "roomtone.wav")
     g, args = [], ["-vn", "-i", src, "-stream_loop", "-1", "-i", tone]
@@ -248,7 +248,8 @@ def build_audio(src, items, overlays, cards, audio_dir, work, total, t_off):
             events.append((o["t0"], "swish"))
     events = [(t - t_off, s) for t, s in events if 0 <= t - t_off < total]
     args = ["-i", dlg, "-ss", f"{t_off:.3f}", "-t", f"{total:.3f}", "-i", os.path.join(audio_dir, "music_full.wav")]
-    g = [f"[1:a]volume={MUSIC_GAIN_DB}dB,afade=t=in:d=1.5[mus]",
+    end_fade = f",afade=t=out:st={total - 3.0:.3f}:d=3" if fade_out else ""
+    g = [f"[1:a]volume={MUSIC_GAIN_DB}dB,afade=t=in:d=1.5{end_fade}[mus]",
          "[0:a]asplit[dl][key]",
          "[mus][key]sidechaincompress=threshold=0.015:ratio=6:attack=40:release=450:knee=4[duck]"]
     mix_in = ["[dl]", "[duck]"]
@@ -331,7 +332,9 @@ def main():
 
     total = t1 - t0
     cards = [c for c in items if c["type"] == "card"]
-    audio, events = build_audio(src, items, overlays, cards, audio_dir, work, total, t0)
+    # the music fades out over the last 3 s when the render reaches the end of the edit
+    audio, events = build_audio(src, items, overlays, cards, audio_dir, work, total, t0,
+                                fade_out=abs(t1 - edl["duration"]) < 0.01)
     ff(["-f", "concat", "-safe", "0", "-i", lst, "-i", audio, "-map", "0:v", "-map", "1:a", "-c:v", "copy",
         "-c:a", "aac", "-b:a", "256k", "-ar", "48000", "-movflags", "+faststart", "-shortest", out])
     json.dump({"window": [t0, t1], "sfx_events": events,
