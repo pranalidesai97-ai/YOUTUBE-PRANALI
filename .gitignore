@@ -3,3 +3,5 @@
 *.mkv
 *.wav
 out/
+__pycache__/
+*.pyc
