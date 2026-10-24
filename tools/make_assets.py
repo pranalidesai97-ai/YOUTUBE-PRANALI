@@ -2,6 +2,7 @@
 """Render every graphic the final timeline needs (PNG layers, cards, B-roll frames).
 
 Usage: make_assets.py edl.json gfx_timeline.json OUT_DIR [T0 T1]
+(GFX_FONT_DIR for gfx.py; BRAND_FONT_DIR for the opening, reminder and end screen in brand_gfx.py)
 With T0/T1 only assets touching that output window are built (test renders).
 Writes OUT_DIR/manifest.json describing each asset for render_final.py.
 """
@@ -10,6 +11,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import brand_gfx  # noqa: E402
 import gfx  # noqa: E402
 
 BROLL = {"fairytale_film": gfx.broll_fairytale, "budget_sheet": gfx.broll_budget,
@@ -43,7 +45,11 @@ def main():
             pages[c["name"]] = gfx.chapter_menu(["5 lessons I learned", "in my twenties"],
                                                 [(t["title"], fmt_ts(t["out_start"])) for t in titles])
         elif c["name"] == "end_screen":
-            pages[c["name"]] = gfx.end_screen_clean()
+            # animated Champagne Editorial outro (frames, opaque); BRAND_FONT_DIR must be set
+            d = os.path.join(out, "end_screen_frames")
+            brand_gfx.render_frames(brand_gfx.CF_end(), c["dur"], d, alpha=False)
+            manifest.setdefault("card_frames", {})[c["name"]] = os.path.join(d, "f%05d.png")
+            continue
         manifest["cards"][c["name"]] = os.path.join(out, c["name"] + ".png")
 
     for it in items:
@@ -72,6 +78,11 @@ def main():
         elif it["type"] == "corner_card":
             pages[it["id"]] = gfx.corner_card(it["text"])
             m["layers"].append({"png": f"{it['id']}.png", "t": it["t0"]})
+        elif it["type"] == "anim":
+            make, _ = brand_gfx.ANIM[it["asset"]]
+            d = os.path.join(out, f"{it['id']}_frames")
+            brand_gfx.render_frames(make(), it["t1"] - it["t0"], d, alpha=True)
+            m["frames"] = os.path.join(d, "f%05d.png")
         elif it["type"] == "broll":
             if it["asset"] not in BROLL:
                 print(f"MISSING B-roll asset '{it['asset']}' for {it['id']} - not built")
@@ -89,7 +100,7 @@ def main():
             layer["png"] = os.path.join(out, layer["png"])
     manifest["pip_mask"] = os.path.join(out, "pip_mask.png")
     json.dump(manifest, open(os.path.join(out, "manifest.json"), "w"), indent=1)
-    print(f"{len(pages)} graphics pages, {sum(1 for m in manifest['items'] if 'frames' in m)} B-roll clips")
+    print(f"{len(pages)} graphics pages, {sum(1 for m in manifest['items'] if 'frames' in m)} animated clips")
 
 
 if __name__ == "__main__":

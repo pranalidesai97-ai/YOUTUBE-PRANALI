@@ -2,6 +2,25 @@
  "note": "Graphics plan. Anchors are [phrase, approx source second]; tools/plan_graphics.py resolves them to output times through the EDL. Text is the speaker's own words (trimmed) unless it is a heading.",
  "items": [
   {
+   "id": "OPEN",
+   "type": "anim",
+   "asset": "opening",
+   "note": "Opening title (Champagne Editorial) over the hook, gone before 'Hi everyone' at 0:06.5",
+   "t0": 0.0,
+   "dur": 5.0
+  },
+  {
+   "id": "SUB",
+   "type": "anim",
+   "asset": "subscribe",
+   "note": "Subscribe reminder, once, top right",
+   "start": [
+    "guidance around us",
+    176.6
+   ],
+   "dur": 4.8
+  },
+  {
    "id": "KW1",
    "type": "keywords",
    "items": [
@@ -183,7 +202,7 @@
   {
    "id": "PQ3",
    "type": "pullquote",
-   "text": "Whoever is **paying** for you is going to **control** your life.",
+   "text": "Whoever is **paying** for you\nis going to **control** your life.",
    "start": [
     "whoever is paying",
     417

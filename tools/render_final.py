@@ -135,6 +135,11 @@ def render_chunk(n, items, overlays, cues, hidden, jumps, src, font_dir, mask, w
                 cx, cy = round(FACE[0] * W - FACE[0] * cw), round(FACE[1] * H - FACE[1] * ch)
                 chain += f",crop={cw}:{ch}:{cx}:{cy},scale={W}:{H}:flags=lanczos"
             g.append(chain + ",format=yuv420p,setsar=1" + f"[s{i}]")
+        elif it.get("frames"):   # animated card: frame sequence, entered at the window offset
+            args += ["-framerate", str(FPS), "-start_number", str(round(it.get("card_offset", 0) * FPS)),
+                     "-i", it["frames"]]
+            g.append(f"[{k}:v]{RGBA_IN.replace('yuva420p', 'yuv420p')},trim=end_frame={frames},"
+                     f"setpts=N/{FPS}/TB,setsar=1[s{i}]")
         else:
             args += ["-loop", "1", "-framerate", str(FPS), "-i", it["png"]]
             g.append(f"[{k}:v]{RGBA_IN.replace('yuva420p', 'yuv420p')},trim=end_frame={frames},"
@@ -161,6 +166,14 @@ def render_chunk(n, items, overlays, cues, hidden, jumps, src, font_dir, mask, w
             g.append(f"[{k}:v]{RGBA_IN.replace('yuva420p', 'yuv420p')},setpts=PTS-STARTPTS+{lt(a):.3f}/TB[br{k}];"
                      f"[{cur}][br{k}]overlay=enable='{en}':eof_action=pass[bro{k}]")
             cur = f"bro{k}"
+            k += 1
+            continue
+        if o["type"] == "anim":   # transparent animated overlay (opening title, Subscribe reminder)
+            start = round((a - o["t0"]) * FPS)
+            args += ["-framerate", str(FPS), "-start_number", str(start), "-i", o["frames"]]
+            g.append(f"[{k}:v]{RGBA_IN},setpts=PTS-STARTPTS+{lt(a):.3f}/TB[an{k}];"
+                     f"[{cur}][an{k}]overlay=enable='{en}':eof_action=pass[ano{k}]")
+            cur = f"ano{k}"
             k += 1
             continue
         if o["type"] == "pip":
@@ -249,7 +262,8 @@ def build_audio(src, items, overlays, cards, audio_dir, work, total, t_off, fade
     events = [(t - t_off, s) for t, s in events if 0 <= t - t_off < total]
     args = ["-i", dlg, "-ss", f"{t_off:.3f}", "-t", f"{total:.3f}", "-i", os.path.join(audio_dir, "music_full.wav")]
     end_fade = f",afade=t=out:st={total - 3.0:.3f}:d=3" if fade_out else ""
-    g = [f"[1:a]volume={MUSIC_GAIN_DB}dB,afade=t=in:d=1.5{end_fade}[mus]",
+    # the approved 660 s music file is used as is; past its own fade-out it is padded with silence
+    g = [f"[1:a]volume={MUSIC_GAIN_DB}dB,apad=whole_dur={total:.4f},afade=t=in:d=1.5{end_fade}[mus]",
          "[0:a]asplit[dl][key]",
          "[mus][key]sidechaincompress=threshold=0.015:ratio=6:attack=40:release=450:knee=4[duck]"]
     mix_in = ["[dl]", "[duck]"]
@@ -289,7 +303,10 @@ def main():
     items = window_timeline(tl, t0, t1)
     for it in items:
         if it["type"] == "card":
-            it["png"] = man["cards"][it["name"]]
+            if it["name"] in man.get("card_frames", {}):
+                it["frames"] = man["card_frames"][it["name"]]
+            else:
+                it["png"] = man["cards"][it["name"]]
 
     overlays = []
     for m in man["items"]:

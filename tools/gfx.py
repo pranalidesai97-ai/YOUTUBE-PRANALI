@@ -46,7 +46,8 @@ def _bold(text, color=None):
     """**word** -> bold (or coloured) span."""
     t = html.escape(text)
     style = f"font-weight:700;color:{color}" if color else "font-weight:700"
-    return re.sub(r"\*\*(.+?)\*\*", rf"<span style='{style}'>\1</span>", t)
+    t = re.sub(r"\*\*(.+?)\*\*", rf"<span style='{style}'>\1</span>", t)
+    return t.replace("\n", "<br>")   # an explicit line break where the automatic wrap would strand a word
 
 
 def page(body, bg=None, bg_filter="", opaque=False):

@@ -600,6 +600,173 @@ def C_end(guides=False):
     return page(svg(art) + t + (guides_overlay() if guides else ""), opaque=True)
 
 
+# ============================================================================= C final (approved direction)
+# Animated versions of C. Each page exposes window.setT(t) (seconds) and is stepped frame by frame
+# by render_frames(). Motion is restrained: fades with a few px of drift, gold lines drawn on,
+# a wax seal settling, slow sparkle. Elements carry data-in (start, s), data-d (duration, s) and
+# data-kind: "fade" (default), "draw" (stroke draw-on), "seal" (settle) or "tw" (twinkle).
+CREATOR, HANDLE = "Pranali Desai", "@heyPranali"
+FINAL_SUBTITLE = "Things I wish someone had told me in my twenties."
+REMINDER_LINE = "for more life lessons"
+OPENING_DUR, REMINDER_DUR, END_DUR = 5.0, 4.8, 18.0
+
+_ANIM_JS = """
+<script>
+const E = x => { x = Math.min(1, Math.max(0, x)); return 1 - Math.pow(1 - x, 3); };
+const SM = x => { x = Math.min(1, Math.max(0, x)); return x * x * (3 - 2 * x); };
+const els = [...document.querySelectorAll('[data-in]')];
+els.forEach(el => {
+  if (el.dataset.kind === 'draw')
+    el.querySelectorAll('path,ellipse,rect,circle,line,polyline').forEach(p => {
+      if (p.getAttribute('fill') && p.getAttribute('fill') !== 'none' && !p.getAttribute('stroke')) return;
+      const L = p.getTotalLength(); p.style.strokeDasharray = L + ' ' + L; p.dataset.len = L; });
+});
+const tws = [...document.querySelectorAll('.tw')];
+window.setT = function (t) {
+  for (const el of els) {
+    const a = +el.dataset.in, d = +(el.dataset.d || 0.8), k = E((t - a) / d), kind = el.dataset.kind || 'fade';
+    if (kind === 'fade') { el.style.opacity = k; el.style.transform = 'translateY(' + ((1 - k) * +(el.dataset.dy || 10)).toFixed(2) + 'px)'; }
+    else if (kind === 'draw') {
+      el.style.opacity = Math.min(1, k * 4);
+      el.querySelectorAll('[data-len]').forEach(p => p.style.strokeDashoffset = (1 - SM((t - a) / d)) * p.dataset.len);
+    } else if (kind === 'seal') {
+      el.style.opacity = Math.min(1, k * 2.5);
+      el.style.transform = 'scale(' + (1.12 - 0.12 * k).toFixed(4) + ') rotate(' + (-8 * (1 - k)).toFixed(2) + 'deg)';
+    }
+  }
+  tws.forEach((s, i) => { const ph = i * 1.7;
+    s.style.opacity = (0.45 + 0.55 * (0.5 + 0.5 * Math.sin(t * 1.6 + ph))).toFixed(3); });
+  const root = document.getElementById('root'), T = +root.dataset.dur, out = +(root.dataset.out || 0.6);
+  root.style.opacity = (1 - SM((t - (T - out)) / out)).toFixed(4);
+};
+window.setT(0);
+</script>"""
+
+
+def _a(t, d=0.8, kind="fade", dy=10):
+    return f'data-in="{t}" data-d="{d}" data-kind="{kind}" data-dy="{dy}"'
+
+
+def _g(inner, t, d=0.8, kind="fade", origin=None):
+    o = (f' style="transform-box:fill-box;transform-origin:center"' if kind == "seal" else "")
+    return f'<g {_a(t, d, kind)}{o}>{inner}</g>'
+
+
+def _anim_page(body, dur, out=0.6, opaque=False, bg=None):
+    # bg (a still) is for preview stills only; the video pages are transparent overlays
+    doc = page(f'<div id="root" data-dur="{dur}" data-out="{out}" style="position:absolute;inset:0">{body}</div>',
+               bg=bg, opaque=opaque, bg_color=C["plum_deep"])
+    return doc.replace("</body>", _ANIM_JS + "</body>")
+
+
+def CF_opening(bg=None):
+    c = C
+    veil = (f'<div class="abs" {_a(0.0, 0.9, dy=0)} style="left:1190px;top:0;width:730px;height:1080px;'
+            'background:linear-gradient(90deg,rgba(248,242,233,0) 0%,rgba(248,242,233,.70) 21%,rgba(248,242,233,.80) 100%)"></div>')
+    art = svg(_g(gold_frame(36, 36, 1848, 1008, 9, 1.4, corners=False), 0.15, 1.6, "draw")
+              + _g(fineline(1846, 1018, .66, -8, flip=True), 0.5, 2.2, "draw")
+              + _g(fineline(1770, 1034, .42, 12), 0.8, 2.0, "draw")
+              + _g(sparkle(1812, 128, 12, cls="tw") + sparkle(1788, 154, 6, op=.8, cls="tw")
+                   + sparkle(1372, 168, 8, op=.8, cls="tw"), 0.9, 0.8))
+    L = 1316
+    t = (text(L, 112, 548, f'<div class="play" {_a(0.35, 0.9)} style="font-size:150px;line-height:.9;font-style:italic;color:{c["gold_deep"]}">5</div>')
+         + text(L, 262, 548,
+                f'<div class="play" {_a(0.55, 0.9)} style="font-size:80px;line-height:1.02;color:{c["plum"]};font-weight:500">Life Lessons</div>'
+                f'<div class="play" {_a(0.75, 0.9)} style="font-size:54px;line-height:1.15;color:{c["plum"]};font-style:italic">I Wish I Knew Earlier</div>')
+         + text(L, 432, 548, f'<div {_a(1.0, 0.9, dy=0)}>{_divider(c["gold_deep"], 220)}</div>')
+         + text(L, 506, 548,
+                f'<div class="corm" {_a(1.15, 0.9)} style="font-size:42px;font-style:italic;line-height:1.22;color:{c["plum_soft"]};'
+                f'font-weight:500;padding:0 30px">{html.escape(FINAL_SUBTITLE)}</div>')
+         + text(L, 650, 548,
+                f'<div {_a(1.45, 0.9)}>'
+                f'<div style="width:46px;height:1px;background:{c["gold_deep"]};margin:0 auto 18px"></div>'
+                f'<div class="play" style="font-size:38px;font-style:italic;color:{c["plum"]};line-height:1.1">{html.escape(CREATOR)}</div>'
+                f'<div class="mont" style="font-size:26px;letter-spacing:.08em;color:{c["gold_deep"]};margin-top:8px;font-weight:500">'
+                f'{html.escape(HANDLE)}</div></div>'))
+    return _anim_page(veil + art + t, OPENING_DUR, 0.7, bg=bg)
+
+
+def CF_reminder(bg=None):
+    c = C
+    x, y, w, h = 1290, 80, 556, 126
+    pill = (f'<g filter="url(#shadowSoft)"><rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{h / 2}" fill="{c["paper"]}" opacity=".97"/></g>'
+            f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{h / 2}" filter="url(#grain)"/>')
+    art = svg(_g(pill, 0.0, 0.6)
+              + _g(f'<rect x="{x + 7}" y="{y + 7}" width="{w - 14}" height="{h - 14}" rx="{h / 2 - 7}" fill="none" '
+                   f'stroke="url(#gold)" stroke-width="1.4"/>', 0.2, 1.3, "draw")
+              + _g(wax_seal(x + 66, y + h / 2, 42), 0.35, 0.7, "seal")
+              + _g(fineline(x + w - 58, y + h - 6, .2, 24), 0.6, 1.4, "draw")
+              + _g(sparkle(x + w - 30, y + 18, 8, cls="tw"), 0.9, 0.6))
+    t = text(x + 128, y + 18, w - 160,
+             f'<div class="play" {_a(0.45, 0.7, dy=6)} style="font-size:52px;font-style:italic;color:{c["plum"]};line-height:1">Subscribe</div>'
+             f'<div class="mont" {_a(0.7, 0.7, dy=6)} style="font-size:22px;letter-spacing:.13em;text-transform:uppercase;color:{c["gold_deep"]};'
+             f'margin-top:9px;font-weight:600">{REMINDER_LINE}</div>',
+             align="left")
+    return _anim_page(art + t, REMINDER_DUR, 0.55, bg=bg)
+
+
+def CF_end(guides=False):
+    c = C
+    bx, by, bw, bh = WATCH_BOX
+    sx, sy, sr = SUB_CIRCLE
+    base = svg(f'<rect width="1920" height="1080" fill="url(#plumGlow)"/><rect width="1920" height="1080" filter="url(#grain)" opacity=".7"/>')
+    art = svg(_g(gold_frame(40, 40, 1840, 1000, 10, 1.4, corners=False), 0.1, 1.8, "draw")
+              + _g(fineline(96, 1032, .78, 4) + fineline(196, 1040, .5, -16, flip=True), 0.6, 2.6, "draw")
+              + _g(fineline(1836, 1032, .62, -6, flip=True), 0.9, 2.4, "draw")
+              + _g(fineline(1822, 66, .38, 176), 1.1, 2.2, "draw")
+              + _g(f'<rect x="{bx}" y="{by}" width="{bw}" height="{bh}" fill="#4A3446" opacity=".55"/>', 0.9, 0.9)
+              + _g(gold_frame(bx - 16, by - 16, bw + 32, bh + 32, 8, 1.4), 1.0, 1.4, "draw")
+              + _g(f'<circle cx="{sx}" cy="{sy}" r="{sr + 12}" fill="none" stroke="url(#gold)" stroke-width="1.6"/>'
+                   f'<circle cx="{sx}" cy="{sy}" r="{sr + 20}" fill="none" stroke="url(#gold)" stroke-width=".8"/>', 1.3, 1.4, "draw")
+              + _g(wax_seal(sx + sr + 4, sy - sr + 6, 34), 2.1, 0.8, "seal")
+              + _g(sparkle(930, 130, 12, c["gold_light"], cls="tw") + sparkle(955, 156, 6, c["gold_light"], .8, cls="tw")
+                   + sparkle(1790, 760, 8, c["gold_light"], .8, cls="tw"), 1.4, 0.8)
+              + _g(ribbon(bx + bw / 2 - 180, by + bh + 44, 360, 60, "watch next", c["sage_deep"], size=24, spacing=".26em"), 1.8, 0.8))
+    t = (text(150, 128, 820,
+              f'<div class="mont" {_a(0.4)} style="font-size:24px;letter-spacing:.4em;text-transform:uppercase;color:{c["gold_light"]};font-weight:500">'
+              f'with love &amp; gratitude</div>'
+              f'<div class="play" {_a(0.65, 1.0)} style="font-size:138px;line-height:1;font-style:italic;color:#F8EFE6;margin-top:22px">Thank you</div>'
+              f'<div class="mont" {_a(0.95)} style="font-size:32px;letter-spacing:.36em;text-transform:uppercase;color:{c["gold_light"]};margin-top:14px;font-weight:500">'
+              f'for watching</div>'
+              f'<div {_a(1.5, 1.0)} style="margin-top:40px">'
+              f'<div class="corm" style="font-size:27px;font-style:italic;letter-spacing:.06em;color:{c["gold_light"]};opacity:.9">&mdash; note to self</div>'
+              f'<div class="corm" style="font-size:44px;font-style:italic;line-height:1.28;color:#EADBD3;margin-top:6px;max-width:700px;font-weight:500">'
+              f'{CLOSING}</div></div>',
+              align="left")
+         + text(sx + sr + 50, sy - 42, 460,
+                f'<div {_a(1.9)}><div class="play" style="font-size:52px;font-style:italic;color:#F8EFE6;line-height:1">Subscribe</div>'
+                f'<div class="mont" style="font-size:22px;letter-spacing:.14em;text-transform:uppercase;color:{c["gold_light"]};margin-top:10px;font-weight:600">'
+                f'{REMINDER_LINE}</div></div>',
+                align="left"))
+    # the backdrop stays put; only the artwork and text fade out over the last second
+    doc = _anim_page(art + t + (guides_overlay() if guides else ""), END_DUR, 1.0, opaque=True)
+    return doc.replace('<div id="root"', base + '<div id="root"', 1)
+
+
+def render_frames(doc, dur, out_dir, fps=30, alpha=True, start=0, stop=None):
+    """Step window.setT through the page and save f00000.png... (alpha kept for overlays)."""
+    from playwright.sync_api import sync_playwright
+    os.makedirs(out_dir, exist_ok=True)
+    n = int(round(dur * fps))
+    with sync_playwright() as pw:
+        b = pw.chromium.launch()
+        pg = b.new_page(viewport={"width": 1920, "height": 1080})
+        pg.set_content(doc)
+        st = pg.evaluate("""async () => { await Promise.allSettled([...document.fonts].map(f => f.load()));
+             await document.fonts.ready; const f = [...document.fonts];
+             return [f.filter(x => x.status === 'loaded').length, f.length]; }""")
+        if st[0] != st[1]:
+            raise SystemExit(f"fonts failed to load ({st[0]}/{st[1]})")
+        for i in range(start, n if stop is None else min(n, stop)):
+            pg.evaluate(f"window.setT({i / fps})")
+            pg.screenshot(path=os.path.join(out_dir, f"f{i:05d}.png"), omit_background=alpha)
+        b.close()
+    return n
+
+
+ANIM = {"opening": (CF_opening, OPENING_DUR), "subscribe": (CF_reminder, REMINDER_DUR)}
+
+
 def guides_overlay():
     """Where YouTube's own end-screen elements go (preview only, never rendered)."""
     bx, by, bw, bh = WATCH_BOX

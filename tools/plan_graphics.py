@@ -72,8 +72,8 @@ def main():
         elif it["type"] == "pullquote":
             r["t0"] = start_of(it["start"])
             r["t1"] = max(end_of(it["end"]) + READ_PAD, r["t0"] + it.get("min", 2.5))
-        elif it["type"] in ("broll", "corner_card"):
-            r["t0"] = start_of(it["start"])
+        elif it["type"] in ("broll", "corner_card", "anim"):
+            r["t0"] = it["t0"] if "t0" in it else start_of(it["start"])
             # an insert either has a fixed length or runs to the end of a spoken phrase
             r["t1"] = end_of(it["end"]) + 0.35 if "end" in it else r["t0"] + it["dur"]
             # word cues inside the insert, as seconds from its start

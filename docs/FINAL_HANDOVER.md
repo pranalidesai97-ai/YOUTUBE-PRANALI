@@ -363,3 +363,13 @@ python3 tools/qc_final.py $S/final/OUT.mp4 $S/src/source_original.mp4 $S/stage2/
 10. **Deliver as before:** 720p preview plus 1080p parts under 400 MiB, or the single-file route the creator chose.
 11. **Commit** docs and tools (no video) and push to `claude/talking-head-video-edit-djp9i3`.
 12. **In YouTube Studio** (creator's job): add the end-screen "Video" and "Subscribe" elements over the reserved zones. Optionally upload `FINAL_captions.srt` as a caption track.
+
+---
+
+## 9. Status update (session 2, 2026-10-24)
+
+- Creator chose **C, Champagne Editorial**, with this wording: title "5 Life Lessons I Wish I Knew Earlier", subtitle "Things I wish someone had told me in my twenties.", "Pranali Desai" + "@heyPranali" on the opening; "A little series" removed; reminder "Subscribe for more life lessons"; end screen "with love & gratitude", "Thank you for watching", closing line approved, small "note to self" label. The "oh" at 1:59 stays unchanged. PQ3 now breaks after "for you".
+- Built: `brand_gfx.CF_opening/CF_reminder/CF_end` (animated, `window.setT`), `brand_gfx.render_frames`; overlay type `anim` (alpha frame sequence) and animated cards (`card_frames`) in `make_assets.py`/`render_final.py`; music padded with silence past the approved 660 s file (`apad`), so the bed under the approved edit is unchanged.
+- Timeline: OPEN 0:00–0:05, SUB 1:29.48–1:34.28, end screen 18 s from 10:42.57. New duration 660.567 s = **19,817 frames**. EDL, captions and every other graphic are identical to the approved version (verified by diff).
+- Test windows rendered from the source and sent as 720p previews. **Waiting for approval before the full render.**
+- The 43 ms gap only existed between the two delivery parts (segment split at 5:27.8). The new master is rendered as one file with one continuous audio track.
