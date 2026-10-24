@@ -63,3 +63,22 @@
 - **Chapter menu text is small.** It matches the approved style frame; the tiles carry 1:09 / 3:43 / 4:45 / 6:29 / 7:55.
 - **No external footage, music or SFX were used.** See `ASSETS_AND_LICENSES.md`.
 - **H.264 level 5.0.** Fine for YouTube and recent tablets; very old devices may only play the 720p preview copy.
+
+---
+
+## v2 master (Champagne Editorial opening, Subscribe reminder, 18 s end screen), 2026-10-24
+
+`Lessons_from_my_twenties_FINAL_v2_1080p30.mp4`: 507,055,596 bytes, SHA-256 `a4111b56832a5ed6a48c58166c09d65a8c52da2fdcb28d530e548799e4887f4d`.
+Rendered in one pass from the original (source SHA-256 re-verified). Full data: `docs/FINAL_v2_qc_report.json`; sheets `docs/FINAL_v2_qc_*.jpg`.
+
+| Check | Result |
+|---|---|
+| Video | H.264 High, 1920×1080, 30/1 CFR, yuv420p BT.709, **19,817 frames** (= EDL 660.567 s), CRF 16, faststart |
+| Audio | AAC-LC 48 kHz stereo, 252 kb/s, 660.566 s |
+| Decode errors / black frames | none / none |
+| Freezes | same as v1 (cards, intended B5/B7 holds) plus the end screen hold |
+| Loudness | −16.0 LUFS, LRA 4.5 LU, true peak −1.5 dBTP; no dropouts |
+| Sync vs source (12 points) | picture within ±1 frame, audio 0.0 to −0.5 ms |
+| Audio continuity | 30,966 AAC packets, 0 timestamp gaps; sample-exact (lag 0, corr 1.0000) against the continuous rendered mix at 21 points incl. 5:26.5–5:29.0 |
+
+The v1 two-part delivery, rejoined by stream copy, sits a constant 1024 samples (21.3 ms) off the mix throughout. That came from the split/join, not the mix. v2 is delivered as one file, split byte-for-byte (`split`, `.001`/`.002`), which rejoins to the identical SHA-256.

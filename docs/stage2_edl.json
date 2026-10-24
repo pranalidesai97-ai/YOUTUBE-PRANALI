@@ -699,9 +699,9 @@
   {
    "type": "card",
    "name": "end_screen",
-   "dur": 10.0,
+   "dur": 18.0,
    "out_start": 642.5667
   }
  ],
- "duration": 652.5666666666668
+ "duration": 660.5666666666668
 }

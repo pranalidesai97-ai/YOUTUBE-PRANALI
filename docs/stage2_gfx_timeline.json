@@ -1,5 +1,15 @@
 [
  {
+  "id": "OPEN",
+  "type": "anim",
+  "asset": "opening",
+  "note": "Opening title (Champagne Editorial) over the hook, gone before 'Hi everyone' at 0:06.5",
+  "t0": 0.0,
+  "dur": 5.0,
+  "t1": 5.0,
+  "cues": {}
+ },
+ {
   "id": "KW1",
   "type": "keywords",
   "items": [
@@ -93,6 +103,20 @@
   },
   "t0": 47.821,
   "t1": 50.811
+ },
+ {
+  "id": "SUB",
+  "type": "anim",
+  "asset": "subscribe",
+  "note": "Subscribe reminder, once, top right",
+  "start": [
+   "guidance around us",
+   176.6
+  ],
+  "dur": 4.8,
+  "t0": 89.479,
+  "t1": 94.279,
+  "cues": {}
  },
  {
   "id": "PQ1",
@@ -191,7 +215,7 @@
  {
   "id": "PQ3",
   "type": "pullquote",
-  "text": "Whoever is **paying** for you is going to **control** your life.",
+  "text": "Whoever is **paying** for you\nis going to **control** your life.",
   "start": [
    "whoever is paying",
    417
