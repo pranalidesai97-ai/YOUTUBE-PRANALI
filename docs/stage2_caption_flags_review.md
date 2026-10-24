@@ -1,4 +1,4 @@
-# Caption flags for review (stage 2) - updated after review round 3
+# Caption flags for review (stage 2) - updated after review round 4: all caption flags resolved
 
 - **Times:** "Output" times are in the current edit (10:53.9); "source" times are in your original recording. The per-item detail below keeps the cue numbers from round 1. After cue 241, current numbers are one lower.
 - **Cue numbers:** these refer to `docs/stage2_captions.srt`.
@@ -11,7 +11,7 @@
 |---|---|---|---|
 | 1 | Yes | काश **मुझे** किसी ने पहले बता दिया होता, तो मैं अलग चीज़ें करती। | confirmed |
 | 2 | B | As a kid also, / … Prince Charming will come to / rescue you. | applied (now 3 cues instead of 4) |
-| 3 | B | **not applied:** "B" is ambiguous. This document listed B = "be your own pillar", but the clip label listed B = "be your pillar". | **open, cue 68** (renumbered) |
+| 3 | "be your pillar" (round 4) | Okay, be your pillar. | applied, cue 68 |
 | 5 | B | some or the other way. | applied |
 | 7 | B | Third is, | applied |
 | 9 | B | Very early. (capitalised because the previous caption ends a sentence; audio untouched) | applied |

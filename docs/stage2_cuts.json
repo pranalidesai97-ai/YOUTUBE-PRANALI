@@ -275,5 +275,13 @@
    "name": "end_screen",
    "dur": 10.0
   }
+ ],
+ "audio_repairs": [
+  {
+   "start": 253.12,
+   "end": 253.39,
+   "gain": 0.03,
+   "reason": "bell-like 'ting' (~1.6 kHz) in a pause, reported by the speaker at test 0:06; attenuated ~30 dB, no timing change"
+  }
  ]
 }

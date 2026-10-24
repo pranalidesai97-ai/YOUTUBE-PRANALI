@@ -5,7 +5,7 @@ Every external asset used in the edit is listed here. **No stock footage, stock 
 | Asset | Used for | Source | Licence | Monetised YouTube |
 |---|---|---|---|---|
 | Original footage | A-roll, picture-in-picture | Your recording (Google Drive file `1NQAYdsSO12AwiJ4y2TmqecT_eLVoAnot`) | Yours | ✅ |
-| Background music "Twenties" (78 BPM, D major) | Music bed | **Original**, synthesised from scratch by `tools/compose_music.py` (no samples) | Original work created for this video; no third-party rights | ✅ (no Content ID claims possible) |
+| Background music "Twenties" (78 BPM, D major; v2 with soft felt-piano keys, no chime voicing) | Music bed | **Original**, synthesised from scratch by `tools/compose_music.py` (no samples) | Original work created for this video; no third-party rights | ✅ (no Content ID claims possible) |
 | SFX: pop / swish / swell | Notes items and keywords / cards / pull-quotes | **Original**, synthesised by `tools/make_sfx.py` | Original; no third-party rights | ✅ |
 | B-roll illustrations (castle film frame, budget card, …) | B-roll inserts | **Original** HTML/SVG illustrations, `tools/gfx.py` | Original; no third-party rights | ✅ |
 | Instrument Serif | Titles, notes, cards | npm `@fontsource/instrument-serif` | SIL Open Font License 1.1 | ✅ |

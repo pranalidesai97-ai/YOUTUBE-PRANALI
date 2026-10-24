@@ -30,6 +30,7 @@ VENC = ["-c:v", "libx264", "-preset", "slow", "-crf", "16", "-profile:v", "high"
         "-g", "60", "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709",
         "-color_range", "tv", "-r", str(FPS)]
 RGBA_IN = "scale=out_color_matrix=bt709:out_range=tv,format=yuva420p"
+REPAIRS = []                 # filled from docs/stage2_cuts.json "audio_repairs"
 
 
 def ff(args, quiet=True):
@@ -217,7 +218,10 @@ def build_audio(src, items, overlays, cards, audio_dir, work, total, t_off):
         d = item_dur(it)
         if it["type"] == "src":
             f = min(FADE, d / 4)
-            g.append(f"[0:a:0]atrim=start={it['in']:.4f}:end={it['out']:.4f},asetpts=PTS-STARTPTS,"
+            fix = "".join(f",volume={r['gain']}:enable='between(t,{max(0.0, r['start'] - it['in']):.4f},"
+                          f"{r['end'] - it['in']:.4f})'"
+                          for r in REPAIRS if r["start"] < it["out"] and r["end"] > it["in"])
+            g.append(f"[0:a:0]atrim=start={it['in']:.4f}:end={it['out']:.4f},asetpts=PTS-STARTPTS{fix},"
                      f"afade=t=in:d={f:.4f},afade=t=out:st={d - f:.4f}:d={f:.4f}[d{i}]")
         else:
             g.append(f"[1:a]atrim=duration={d:.4f},asetpts=PTS-STARTPTS,"
@@ -275,6 +279,9 @@ def main():
     win = (float(sys.argv[10]), float(sys.argv[11])) if len(sys.argv) > 11 else None
     edl = json.load(open(edl_path))
     man = json.load(open(man_path))
+    # source-time audio repairs (e.g. a stray non-speech sound in a pause), from the cut spec
+    spec = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "docs", "stage2_cuts.json")
+    REPAIRS[:] = json.load(open(spec)).get("audio_repairs", [])
     gfx_tl = {g["id"]: g for g in json.load(open(gfx_path))}
     tl = edl["timeline"]
     t0, t1 = win if win else (0.0, edl["duration"])

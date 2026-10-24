@@ -80,15 +80,15 @@
    ],
    "text": "your great twenties.",
    "decision": "item 11: option B (round 3)"
-  }
- ],
- "flag": [
+  },
   {
    "words": [
     456,
     458
    ],
-   "note": "Item 3 (R8) unresolved: answer 'B' is ambiguous - review doc listed B = 'be your own pillar', clip label listed B = 'be your pillar'"
+   "text": "be your pillar.",
+   "decision": "item 3: 'be your pillar' (round 4)"
   }
- ]
+ ],
+ "flag": []
 }

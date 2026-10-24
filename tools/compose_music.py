@@ -2,7 +2,7 @@
 """Original background music, synthesised from scratch (no samples, no external assets).
 
 Calm, warm lo-fi bed for a talking-head video: 78 BPM, D major,
-Dmaj9 - Bm9 - Gmaj9 - A7sus4. Felt-piano-like keys and a soft pad throughout;
+Dmaj9 - Bm9 - Gmaj9 - A7sus4. Soft felt-piano keys (no octave-up chime voicing) and a soft pad throughout;
 a round sub bass and a very light brushed hat join in alternate 16-bar sections.
 Being generated here, the track is an original work with no third-party licence.
 
@@ -39,10 +39,11 @@ def keys_note(f, dur, vel, rng):
     n = int(dur * SR)
     t = np.arange(n) / SR
     det = 1 + rng.normal(0, 0.0007)
-    tone = (np.sin(2 * np.pi * f * det * t) + 0.28 * np.sin(4 * np.pi * f * t) * np.exp(-t * 3)
-            + 0.08 * np.sin(6 * np.pi * f * t) * np.exp(-t * 6))
-    env = (1 - np.exp(-t / 0.006)) * np.exp(-t / 1.1)
-    return vel * tone * env
+    # felt-piano tone: soft attack, few overtones and a low-pass, so notes don't ring like bells
+    tone = (np.sin(2 * np.pi * f * det * t) + 0.16 * np.sin(4 * np.pi * f * t) * np.exp(-t * 5)
+            + 0.03 * np.sin(6 * np.pi * f * t) * np.exp(-t * 9))
+    env = (1 - np.exp(-t / 0.018)) * np.exp(-t / 0.85)
+    return lowpass(vel * tone * env, 1800)
 
 
 def pad_chord(notes, dur):
@@ -95,7 +96,7 @@ def main():
         for off, v in patterns[(b // 4) % 2]:
             jitter = rng.normal(0, 0.012)
             vel = 0.11 * (0.75 + 0.25 * rng.random())
-            add(keys_note(hz(notes[v] + 12 * (v < 2)), 2.6, vel, rng), t0 + off * BEAT + jitter,
+            add(keys_note(hz(notes[v]), 2.6, vel, rng), t0 + off * BEAT + jitter,
                 pan=(v - 2) * 0.18)
         if section_b:
             for off in (0, 2.5):
