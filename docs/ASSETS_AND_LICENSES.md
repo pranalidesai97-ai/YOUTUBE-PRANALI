@@ -22,7 +22,19 @@ Speech recognition and voice-activity models are used only for analysis; none of
 All of them ran locally, and no footage was uploaded anywhere.
 
 ## Gaps (flagged, not faked)
-- **No real B-roll footage.** The reference uses personal-proof clips (selfie, product, demo), about 14–19 % of its runtime. This edit uses **original illustrated B-roll** instead: 7 inserts, about 5 % of runtime. To get closer to the reference, either:
+- **No real B-roll footage.** The reference uses personal-proof clips (selfie, product, demo), about 14–19 % of its runtime. This edit uses **7 original illustrated inserts**, each timed to your own words. Together they run about 40 s, roughly 6 % of the 10:54 runtime:
+
+  | Insert | Output time | Length | What it shows |
+  |---|---|---|---|
+  | B1 | 0:36 | 3.6 s | "seek help / seek advice from other people": figure with "?", advisers appear |
+  | B2 | 0:48 | 3.0 s | "thirty next year": "Next year" calendar, 30 circled |
+  | B3 | 2:33 | 5.2 s | Prince Charming / movies: fairy-tale castle in a film frame (approved in test) |
+  | B4 | 3:54 | 4.5 s | "handle your finances": budget card (approved in test) |
+  | B5 | 4:54 | 5.5 s | "scroll, watch a YouTube video, watch a movie": phone feed → generic video card → clapper (no YouTube branding) |
+  | B6 | 6:34 | 4.5 s | "tell us what to do, what not to do": bubbles with ✓ / ✗ |
+  | B7 | 8:38 | 13.6 s | "a trip… a degree… where to travel… buy or not… which city": signpost, one arm per choice |
+
+  To get closer to the reference, either:
   - (a) shoot or upload your own short clips (journaling, baking, laptop budgeting, travel), or
   - (b) allow `pexels.com` / `videos.pexels.com` / `cdn.pixabay.com` in the environment's network settings. Both are free libraries with commercial-use licences. I'd still list each clip here before using it.
 - **Music is original and synthesised**, not a produced library track. If you'd prefer a YouTube Audio Library track, download one (it needs your YouTube login) and I'll swap it in with the same ducking.

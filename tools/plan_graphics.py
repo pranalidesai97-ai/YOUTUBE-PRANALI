@@ -71,7 +71,10 @@ def main():
             r["t1"] = max(end_of(it["end"]) + READ_PAD, r["t0"] + it.get("min", 2.5))
         elif it["type"] in ("broll", "corner_card"):
             r["t0"] = start_of(it["start"])
-            r["t1"] = r["t0"] + it["dur"]
+            # an insert either has a fixed length or runs to the end of a spoken phrase
+            r["t1"] = end_of(it["end"]) + 0.35 if "end" in it else r["t0"] + it["dur"]
+            # word cues inside the insert, as seconds from its start
+            r["cues"] = {k: round(start_of(a) - r["t0"], 3) for k, a in it.get("cues", {}).items()}
         out.append(r)
     out.sort(key=lambda r: r["t0"])
     for a, b in zip(out, out[1:]):

@@ -12,7 +12,11 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gfx  # noqa: E402
 
-BROLL = {"fairytale_film": gfx.broll_fairytale, "budget_sheet": gfx.broll_budget}
+BROLL = {"fairytale_film": gfx.broll_fairytale, "budget_sheet": gfx.broll_budget,
+         "advice_bubbles": gfx.broll_advice_bubbles, "calendar_thirty": gfx.broll_calendar_thirty,
+         "phone_scroll": gfx.broll_phone_scroll, "advice_noise": gfx.broll_advice_noise,
+         "signpost_choices": gfx.broll_signpost_choices}
+CUED = {"advice_bubbles", "calendar_thirty", "phone_scroll", "advice_noise", "signpost_choices"}
 
 
 def fmt_ts(t):
@@ -73,7 +77,9 @@ def main():
                 print(f"MISSING B-roll asset '{it['asset']}' for {it['id']} - not built")
                 continue
             d = os.path.join(out, f"{it['id']}_frames")
-            gfx.render_frames(BROLL[it["asset"]](it["t1"] - it["t0"]), it["t1"] - it["t0"], d)
+            dur = it["t1"] - it["t0"]
+            doc = BROLL[it["asset"]](dur, it["cues"]) if it["asset"] in CUED else BROLL[it["asset"]](dur)
+            gfx.render_frames(doc, dur, d)
             m["frames"] = os.path.join(d, "f%05d.png")
         manifest["items"].append(m)
 

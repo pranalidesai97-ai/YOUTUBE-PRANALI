@@ -7,6 +7,7 @@ style frames. Palette is derived from the set (ivory wall, plum top, brass lamp)
 """
 import base64
 import html
+import json
 import os
 import re
 
@@ -393,3 +394,203 @@ def render_frames(doc, dur, out_dir, fps=30):
             pg.evaluate(f"window.setT({i / fps})")
             pg.screenshot(path=os.path.join(out_dir, f"f{i:05d}.png"))
         b.close()
+
+
+# ---------------------------------------------------------------------------
+# Cue-driven illustrated B-roll. `cues` maps names to seconds from the start of
+# the insert (resolved from the speaker's words); elements ease in on their cue.
+
+BROLL_BG = "radial-gradient(ellipse at 50% 35%,#4A3A4E 0%,#2E2232 70%,#241B27 100%)"
+
+_POP_JS = """
+function ease(x){x=Math.min(1,Math.max(0,x));return 1-Math.pow(1-x,3);}
+function pop(el,t,cue,d){const k=ease((t-cue)/(d||0.25));el.style.opacity=k;
+  el.style.transform=(el.dataset.base||'')+' scale('+(0.9+0.1*k)+')';}
+"""
+
+
+def _person(x, y, s, color, extra=""):
+    """Simple figure: head + shoulders, bottom-centre at (x, y), height ~ 260*s."""
+    return (f"<g transform='translate({x} {y}) scale({s})' {extra}>"
+            f"<circle cx='0' cy='-200' r='52' fill='{color}'/>"
+            f"<path d='M-95 0 v-60 a95 80 0 0 1 190 0 v60z' fill='{color}'/></g>")
+
+
+def _cue_js(cues):
+    return "const CUES=" + json.dumps(cues) + ";"
+
+
+def broll_advice_bubbles(dur, cues):
+    """'…we often seek help, often seek advice from other people.'"""
+    p = PALETTE
+    others = [(300, 820, -1), (640, 900, -1), (1280, 900, 1), (1620, 820, 1)]
+    figs = "".join(f"<g class='o' data-i='{i}'>{_person(x, y, 0.95, p['accent'])}"
+                   f"<g transform='translate({x + 50 * d} {y - 360})'>"
+                   f"<rect x='-100' y='-62' width='200' height='124' rx='34' fill='{p['paper']}'/>"
+                   f"<polygon points='{-20 * d},58 {-52 * d},96 {12 * d},58' fill='{p['paper']}'/>"
+                   f"<g fill='{p['ink']}'><circle cx='-40' cy='0' r='11'/><circle cx='0' cy='0' r='11'/>"
+                   f"<circle cx='40' cy='0' r='11'/></g></g></g>"
+                   for i, (x, y, d) in enumerate(others))
+    return page(f"""<div class="abs" style="inset:0;background:{BROLL_BG}"></div>
+      <svg id="cam" class="abs" viewBox="0 0 1920 1080" width="1920" height="1080" style="transform-origin:50% 45%">
+        {figs}
+        {_person(960, 880, 1.35, p['paper'])}
+        <g id="q"><g transform="translate(1110 420)"><circle r="74" fill="{p['highlight']}"/>
+          <text x="0" y="32" text-anchor="middle" font-family="Serif" font-size="104" fill="{p['ink']}">?</text></g></g>
+      </svg>
+      <script>{_POP_JS}{_cue_js(cues)}
+      window.setT=function(t){{
+        document.getElementById('cam').style.transform='scale('+(1+0.03*t/{dur})+')';
+        const q=document.getElementById('q'); q.style.transformBox='fill-box'; q.style.transformOrigin='center';
+        pop(q,t,CUES.help);
+        document.querySelectorAll('.o').forEach(o=>{{o.style.transformBox='fill-box';o.style.transformOrigin='center bottom';
+          pop(o,t,CUES.advice+0.14*(+o.dataset.i),0.3);}});
+      }};</script>""")
+
+
+def broll_calendar_thirty(dur, cues):
+    """'I'm going to be thirty next year. So I'll be entering my thirties…'"""
+    p = PALETTE
+    return page(f"""<div class="abs" style="inset:0;background:{BROLL_BG}"></div>
+      <div id="cal" class="abs" style="left:610px;top:90px;width:700px;height:720px;background:#FFFDF8;border-radius:30px;
+        box-shadow:0 24px 60px rgba(0,0,0,.45);overflow:hidden">
+        <div style="height:150px;background:{p['accent']};display:flex;align-items:center;justify-content:center">
+          <div class="serif" style="font-size:78px;color:#fff">Next year</div></div>
+        <div style="position:absolute;top:-22px;left:0;right:0;display:flex;justify-content:space-around;padding:0 140px">
+          <div style="width:26px;height:70px;border-radius:13px;background:#2E2232"></div>
+          <div style="width:26px;height:70px;border-radius:13px;background:#2E2232"></div></div>
+        <div id="num" class="serif" style="position:absolute;left:0;right:0;top:210px;text-align:center;font-size:360px;
+          line-height:1;color:{p['ink']}">30</div>
+        <svg class="abs" style="left:150px;top:190px" width="400" height="440" viewBox="0 0 400 440">
+          <ellipse id="ring" cx="200" cy="225" rx="180" ry="195" fill="none" stroke="{p['highlight']}" stroke-width="14"
+            stroke-linecap="round" transform="rotate(-80 200 225)" stroke-dasharray="1200" stroke-dashoffset="1200"/></svg>
+      </div>
+      <script>{_POP_JS}{_cue_js(cues)}
+      window.setT=function(t){{
+        const c=document.getElementById('cal'); c.style.transform='translateY('+(18*(1-ease(t/0.4)))+'px) scale('+(1+0.03*t/{dur})+')';
+        c.style.opacity=ease(t/0.3);
+        document.getElementById('ring').setAttribute('stroke-dashoffset',1200*(1-ease((t-CUES.thirty-0.35)/0.9)));
+      }};</script>""")
+
+
+def broll_phone_scroll(dur, cues):
+    """'Often, when we are bored, we scroll, watch a YouTube video, watch a movie.'"""
+    p = PALETTE
+    cards = "".join(f"""<div style="margin:0 26px 26px;background:#fff;border-radius:22px;padding:20px">
+        <div style="height:190px;border-radius:14px;background:{c}"></div>
+        <div style="height:18px;width:80%;margin-top:18px;border-radius:9px;background:#E3DCD3"></div>
+        <div style="height:18px;width:55%;margin-top:12px;border-radius:9px;background:#EDE7E0"></div></div>"""
+                    for c in ["#C9B2C6", "#E8CFA3", "#9FB5A8", "#B9A3C4", "#E3B04B", "#8C6E84",
+                              "#C9B2C6", "#9FB5A8", "#E8CFA3", "#B9A3C4", "#8C6E84", "#E3B04B"])
+    return page(f"""<div class="abs" style="inset:0;background:{BROLL_BG}"></div>
+      <div id="ph" class="abs" style="left:690px;top:40px;width:540px;height:800px;border-radius:64px;background:#141015;
+        box-shadow:0 30px 70px rgba(0,0,0,.55);padding:22px;box-sizing:border-box">
+        <div style="position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#F1ECE4">
+          <div id="feed" style="position:absolute;left:0;right:0;top:30px">{cards}</div>
+          <div id="vid" style="position:absolute;left:20px;right:20px;top:200px;height:300px;border-radius:22px;
+            background:linear-gradient(135deg,#3A2A3B,#6E5A6B);display:flex;align-items:center;justify-content:center;opacity:0">
+            <div style="width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;
+              align-items:center;justify-content:center"><div style="width:0;height:0;border-left:40px solid {p['ink']};
+              border-top:25px solid transparent;border-bottom:25px solid transparent;margin-left:10px"></div></div></div>
+          <div id="mov" style="position:absolute;inset:0;background:#1E1620;display:flex;align-items:center;
+            justify-content:center;opacity:0">
+            <svg width="260" height="230" viewBox="0 0 260 230">
+              <g transform="rotate(-12 30 70)"><rect x="10" y="40" width="240" height="46" rx="6" fill="#F4EFE6"/>
+                <g fill="#1E1620"><polygon points="40,40 70,40 50,86 20,86"/><polygon points="110,40 140,40 120,86 90,86"/>
+                <polygon points="180,40 210,40 190,86 160,86"/></g></g>
+              <rect x="10" y="96" width="240" height="124" rx="10" fill="#F4EFE6"/>
+              <rect x="30" y="118" width="200" height="12" rx="6" fill="#C9B2C6"/>
+              <rect x="30" y="146" width="140" height="12" rx="6" fill="#E8CFA3"/></svg></div>
+        </div></div>
+      <script>{_POP_JS}{_cue_js(cues)}
+      window.setT=function(t){{
+        const ph=document.getElementById('ph'); ph.style.transform='translateY('+(24*(1-ease(t/0.45)))+'px)';
+        ph.style.opacity=ease(t/0.35);
+        const s=Math.max(0,t-CUES.scroll); // scrolling speeds up like a flick, then keeps going
+        document.getElementById('feed').style.transform='translateY('+(-(s*520+120*Math.min(1,s)))+'px)';
+        const v=document.getElementById('vid'); v.style.opacity=ease((t-CUES.video)/0.25);
+        v.style.transform='scale('+(0.92+0.08*ease((t-CUES.video)/0.3))+')';
+        const m=document.getElementById('mov'); m.style.opacity=ease((t-CUES.movie)/0.25);
+      }};</script>""")
+
+
+def broll_advice_noise(dur, cues):
+    """'We have people around us who often try to tell us what to do, what not to do.'"""
+    p = PALETTE
+    spots = [(500, 250, "do"), (1420, 250, "not"), (300, 520, "not"), (1620, 520, "do"),
+             (520, 790, "do"), (1400, 790, "not")]
+    bub = ""
+    for i, (x, y, kind) in enumerate(spots):
+        mark = (f"<path d='M-34 2 l22 24 l48 -54' fill='none' stroke='#7E9C8A' stroke-width='16' stroke-linecap='round' "
+                f"stroke-linejoin='round'/>" if kind == "do" else
+                f"<g stroke='#B5615B' stroke-width='16' stroke-linecap='round'><line x1='-30' y1='-30' x2='30' y2='30'/>"
+                f"<line x1='30' y1='-30' x2='-30' y2='30'/></g>")
+        tail = 1 if x < 960 else -1
+        bub += (f"<g class='b' data-i='{i}' data-k='{kind}'><g transform='translate({x} {y})'>"
+                f"<rect x='-115' y='-74' width='230' height='148' rx='40' fill='{p['paper']}'/>"
+                f"<polygon points='{tail * 70},60 {tail * 125},96 {tail * 30},70' fill='{p['paper']}'/>"
+                f"<g class='dots' fill='{p['ink']}'><circle cx='-44' r='12'/><circle r='12'/><circle cx='44' r='12'/></g>"
+                f"<g class='mk' opacity='0'>{mark}</g></g></g>")
+    return page(f"""<div class="abs" style="inset:0;background:{BROLL_BG}"></div>
+      <svg id="cam" class="abs" viewBox="0 0 1920 1080" width="1920" height="1080" style="transform-origin:50% 45%">
+        {_person(960, 880, 1.4, p['paper'])}{bub}</svg>
+      <script>{_POP_JS}{_cue_js(cues)}
+      window.setT=function(t){{
+        document.getElementById('cam').style.transform='scale('+(1.02-0.02*t/{dur})+')';
+        document.querySelectorAll('.b').forEach(b=>{{
+          const i=+b.dataset.i; b.style.transformBox='fill-box'; b.style.transformOrigin='center';
+          const k=ease((t-CUES.tell-0.08*i)/0.25), j=4*Math.sin(t*9+i*1.7)*k;
+          b.style.opacity=k; b.style.transform='translate(0px,'+j+'px) scale('+(0.85+0.15*k)+')';
+          const at=b.dataset.k==='do'?CUES.do:CUES.not;
+          const m=ease((t-at-0.05*i)/0.2); b.querySelector('.mk').setAttribute('opacity',m);
+          b.querySelector('.dots').setAttribute('opacity',1-m);
+        }});
+      }};</script>""")
+
+
+def _icon(name, color):
+    return {
+        "trip": f"<path d='M-34 6 l26 -4 l18 -30 h10 l-8 30 l22 -3 l8 -10 h8 l-4 14 l4 14 h-8 l-8 -10 l-22 -3 l8 30 h-10 "
+                f"l-18 -30 l-26 -4z' fill='{color}'/>",
+        "degree": f"<polygon points='-38,-8 0,-26 38,-8 0,10' fill='{color}'/><path d='M-22 0 v18 q22 14 44 0 v-18' "
+                  f"fill='{color}'/><line x1='34' y1='-6' x2='34' y2='20' stroke='{color}' stroke-width='5'/>",
+        "travel": f"<path d='M0 30 q-30 -32 -30 -52 a30 30 0 0 1 60 0 q0 20 -30 52z' fill='{color}'/>"
+                  f"<circle cx='0' cy='-22' r='11' fill='#FFFDF8'/>",
+        "buy": f"<rect x='-28' y='-14' width='56' height='44' rx='8' fill='{color}'/>"
+               f"<path d='M-14 -14 v-8 a14 14 0 0 1 28 0 v8' fill='none' stroke='{color}' stroke-width='6'/>",
+        "city": f"<g fill='{color}'><rect x='-36' y='-6' width='20' height='36'/><rect x='-12' y='-30' width='24' height='60'/>"
+                f"<rect x='16' y='-16' width='20' height='46'/></g>",
+    }[name]
+
+
+def broll_signpost_choices(dur, cues):
+    """'Like taking a trip, … a college degree, … where to travel or whether to buy or not
+    something, … in which city to live.' One arm per choice, on its word."""
+    p = PALETTE
+    arms = [("trip", "a trip", 1), ("degree", "a degree", -1), ("travel", "where to travel", 1),
+            ("buy", "buy or not", -1), ("city", "which city", 1)]
+    g = ""
+    for i, (key, label, d) in enumerate(arms):
+        y = 150 + i * 140
+        w = 560
+        x0 = 960 + (14 if d > 0 else -14)
+        tip = f"{x0 + d * (w + 54)},{y + 50}"
+        pts = (f"{x0},{y} {x0 + d * w},{y} {tip} {x0 + d * w},{y + 100} {x0},{y + 100}")
+        tx = x0 + 135
+        g += (f"<g class='arm' data-k='{key}' data-d='{d}'><polygon points='{pts}' fill='#FFFDF8'/>"
+              f"<g transform='translate({x0 + d * 62} {y + 52}) scale(1.15)'>{_icon(key, p['accent'])}</g>"
+              f"<text x='{tx if d > 0 else x0 - 110}' y='{y + 70}' text-anchor='{'start' if d > 0 else 'end'}' "
+              f"font-family='Serif' font-size='56' fill='{p['ink']}'>{html.escape(label)}</text></g>")
+    return page(f"""<div class="abs" style="inset:0;background:{BROLL_BG}"></div>
+      <svg id="cam" class="abs" viewBox="0 0 1920 1080" width="1920" height="1080" style="transform-origin:50% 40%">
+        <rect x="946" y="120" width="28" height="760" rx="10" fill="#8C6E84"/>
+        <ellipse cx="960" cy="880" rx="170" ry="22" fill="#1E1620" opacity=".6"/>
+        {g}</svg>
+      <script>{_POP_JS}{_cue_js(cues)}
+      window.setT=function(t){{
+        document.getElementById('cam').style.transform='scale('+(1+0.035*t/{dur})+')';
+        document.querySelectorAll('.arm').forEach(a=>{{
+          const k=ease((t-CUES[a.dataset.k])/0.3), d=+a.dataset.d;
+          a.style.opacity=k; a.style.transform='translateX('+(-d*40*(1-k))+'px)';
+        }});
+      }};</script>""")
