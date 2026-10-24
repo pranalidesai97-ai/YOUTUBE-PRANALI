@@ -94,6 +94,15 @@ def main():
     sil = run(["ffmpeg", "-hide_banner", "-i", FINAL, "-vn", "-af", "silencedetect=noise=-55dB:d=0.25", "-f", "null", "-"]).stderr
     rep["audio_dropouts_below_-55dB_over_0.25s"] = re.findall(r"silence_start: ([\d.]+)", sil)
 
+    # audio continuity: every AAC packet must start exactly where the previous one ended
+    # (a stream-copy join, e.g. of split delivery parts, shows up here as a gap or overlap)
+    pk = run(["ffprobe", "-v", "error", "-select_streams", "a:0", "-show_entries", "packet=pts,duration",
+              "-of", "csv=p=0", FINAL]).stdout.split()
+    pk = [tuple(int(x) for x in l.split(",")[:2]) for l in pk if l.count(",") >= 1]
+    jumps = [(round(b[0] / int(a["sample_rate"]), 3), b[0] - (a_[0] + a_[1]))
+             for a_, b in zip(pk, pk[1:]) if b[0] != a_[0] + a_[1]]
+    rep["audio_continuity"] = {"packets": len(pk), "discontinuities": jumps[:20]}
+
     # sync: picture vs source frame, and audio vs source audio, on many A-roll segments
     segs = [i for i in edl["timeline"] if i["type"] == "src" and i["out"] - i["in"] > 1.5]
     covered = [(g["t0"], g["t1"]) for g in gfx if g["type"] in ("broll", "pip", "pullquote")]
@@ -137,7 +146,7 @@ def main():
             br += [(f"{g['id']} in", g["t0"] + 0.2), (f"{g['id']} mid", (g["t0"] + g["t1"]) / 2), (f"{g['id']} out", g["t1"] + 0.2)]
     rep["sheets"]["broll"] = sheet("qc_broll_inserts.jpg", br)
     gr = [(g["id"], (g["t0"] + g["t1"]) / 2 if g["type"] != "keywords" else g["t1"] - 1.0) for g in gfx
-          if g["type"] in ("notes", "pullquote", "pip", "corner_card", "keywords")]
+          if g["type"] in ("notes", "pullquote", "pip", "corner_card", "keywords", "anim")]
     rep["sheets"]["graphics"] = sheet("qc_graphics.jpg", gr, cols=4, w=480)
     rep["sheets"]["throughout"] = sheet("qc_every_minute.jpg", [(f"{m} min", m * 60 + 30) for m in range(int(T // 60) + 1) if m * 60 + 30 < T], cols=4, w=480)
 
@@ -160,7 +169,7 @@ def main():
     json.dump(rep, open(os.path.join(OUT, "qc_report.json"), "w"), indent=1, ensure_ascii=False)
     print(json.dumps({k: rep[k] for k in ("video", "audio", "format_duration", "expected_duration", "expected_frames",
                                           "x264", "faststart", "decode_errors", "black", "freezes", "loudness",
-                                          "audio_dropouts_below_-55dB_over_0.25s", "sync")}, indent=1))
+                                          "audio_dropouts_below_-55dB_over_0.25s", "audio_continuity", "sync")}, indent=1))
 
 
 if __name__ == "__main__":

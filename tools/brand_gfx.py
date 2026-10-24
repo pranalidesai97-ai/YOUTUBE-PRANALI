@@ -733,10 +733,12 @@ def CF_end(guides=False):
               f'<div class="corm" style="font-size:44px;font-style:italic;line-height:1.28;color:#EADBD3;margin-top:6px;max-width:700px;font-weight:500">'
               f'{CLOSING}</div></div>',
               align="left")
-         + text(sx + sr + 50, sy - 42, 460,
+         + text(sx + sr + 50, sy - 62, 460,
                 f'<div {_a(1.9)}><div class="play" style="font-size:52px;font-style:italic;color:#F8EFE6;line-height:1">Subscribe</div>'
                 f'<div class="mont" style="font-size:22px;letter-spacing:.14em;text-transform:uppercase;color:{c["gold_light"]};margin-top:10px;font-weight:600">'
-                f'{REMINDER_LINE}</div></div>',
+                f'{REMINDER_LINE}</div>'
+                f'<div class="mont" style="font-size:26px;letter-spacing:.08em;color:#F8EFE6;margin-top:14px;font-weight:500">'
+                f'{html.escape(HANDLE)}</div></div>',
                 align="left"))
     # the backdrop stays put; only the artwork and text fade out over the last second
     doc = _anim_page(art + t + (guides_overlay() if guides else ""), END_DUR, 1.0, opaque=True)
