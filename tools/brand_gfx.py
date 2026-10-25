@@ -608,7 +608,7 @@ def C_end(guides=False):
 CREATOR, HANDLE = "Pranali Desai", "@heyPranali"
 FINAL_SUBTITLE = "Things I wish someone had told me in my twenties."
 REMINDER_LINE = "for more life lessons"
-OPENING_DUR, REMINDER_DUR, END_DUR = 5.0, 4.8, 18.0
+OPENING_DUR, REMINDER_DUR, END_DUR = 5.5, 4.8, 18.0
 
 _ANIM_JS = """
 <script>
@@ -660,30 +660,34 @@ def _anim_page(body, dur, out=0.6, opaque=False, bg=None):
 
 
 def CF_opening(bg=None):
+    """Side panel on the wall to the right of the speaker, shown while she greets the viewer.
+    Contained card (no full-frame border or veil), so the footage stays the picture."""
     c = C
-    veil = (f'<div class="abs" {_a(0.0, 0.9, dy=0)} style="left:1190px;top:0;width:730px;height:1080px;'
-            'background:linear-gradient(90deg,rgba(248,242,233,0) 0%,rgba(248,242,233,.70) 21%,rgba(248,242,233,.80) 100%)"></div>')
-    art = svg(_g(gold_frame(36, 36, 1848, 1008, 9, 1.4, corners=False), 0.15, 1.6, "draw")
-              + _g(fineline(1846, 1018, .66, -8, flip=True), 0.5, 2.2, "draw")
-              + _g(fineline(1770, 1034, .42, 12), 0.8, 2.0, "draw")
-              + _g(sparkle(1812, 128, 12, cls="tw") + sparkle(1788, 154, 6, op=.8, cls="tw")
-                   + sparkle(1372, 168, 8, op=.8, cls="tw"), 0.9, 0.8))
-    L = 1316
-    t = (text(L, 112, 548, f'<div class="play" {_a(0.35, 0.9)} style="font-size:150px;line-height:.9;font-style:italic;color:{c["gold_deep"]}">5</div>')
-         + text(L, 262, 548,
-                f'<div class="play" {_a(0.55, 0.9)} style="font-size:80px;line-height:1.02;color:{c["plum"]};font-weight:500">Life Lessons</div>'
-                f'<div class="play" {_a(0.75, 0.9)} style="font-size:54px;line-height:1.15;color:{c["plum"]};font-style:italic">I Wish I Knew Earlier</div>')
-         + text(L, 432, 548, f'<div {_a(1.0, 0.9, dy=0)}>{_divider(c["gold_deep"], 220)}</div>')
-         + text(L, 506, 548,
-                f'<div class="corm" {_a(1.15, 0.9)} style="font-size:42px;font-style:italic;line-height:1.22;color:{c["plum_soft"]};'
-                f'font-weight:500;padding:0 30px">{html.escape(FINAL_SUBTITLE)}</div>')
-         + text(L, 650, 548,
+    x, y, w, h = 1356, 120, 500, 780
+    panel = (f'<g filter="url(#shadowSoft)"><rect x="{x}" y="{y}" width="{w}" height="{h}" rx="6" fill="{c["paper"]}" opacity=".93"/></g>'
+             f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="6" filter="url(#grain)" opacity=".8"/>')
+    art = svg(_g(panel, 0.0, 0.7)
+              + _g(gold_frame(x + 16, y + 16, w - 32, h - 32, 7, 1.3, corners=False), 0.2, 1.5, "draw")
+              + _g(fineline(x + w - 34, y + h - 22, .40, -8, flip=True), 0.6, 2.0, "draw")
+              + _g(fineline(x + w - 92, y + h - 18, .26, 14), 0.8, 1.8, "draw")
+              + _g(sparkle(x + w - 50, y + 64, 11, cls="tw") + sparkle(x + w - 72, y + 88, 5, op=.8, cls="tw")
+                   + sparkle(x + 54, y + 92, 7, op=.8, cls="tw"), 0.9, 0.8))
+    L, W = x + 10, w - 20
+    t = (text(L, y + 46, W, f'<div class="play" {_a(0.35, 0.9)} style="font-size:132px;line-height:.9;font-style:italic;color:{c["gold_deep"]}">5</div>')
+         + text(L, y + 178, W,
+                f'<div class="play" {_a(0.55, 0.9)} style="font-size:74px;line-height:1.02;color:{c["plum"]};font-weight:500">Life Lessons</div>'
+                f'<div class="play" {_a(0.75, 0.9)} style="font-size:48px;line-height:1.15;color:{c["plum"]};font-style:italic">I Wish I Knew Earlier</div>')
+         + text(L, y + 330, W, f'<div {_a(1.0, 0.9, dy=0)}>{_divider(c["gold_deep"], 200)}</div>')
+         + text(L, y + 402, W,
+                f'<div class="corm" {_a(1.15, 0.9)} style="font-size:40px;font-style:italic;line-height:1.22;color:{c["plum_soft"]};'
+                f'font-weight:500;padding:0 34px">{html.escape(FINAL_SUBTITLE)}</div>')
+         + text(L, y + 548, W,
                 f'<div {_a(1.45, 0.9)}>'
-                f'<div style="width:46px;height:1px;background:{c["gold_deep"]};margin:0 auto 18px"></div>'
-                f'<div class="play" style="font-size:38px;font-style:italic;color:{c["plum"]};line-height:1.1">{html.escape(CREATOR)}</div>'
+                f'<div style="width:46px;height:1px;background:{c["gold_deep"]};margin:0 auto 16px"></div>'
+                f'<div class="play" style="font-size:36px;font-style:italic;color:{c["plum"]};line-height:1.1">{html.escape(CREATOR)}</div>'
                 f'<div class="mont" style="font-size:26px;letter-spacing:.08em;color:{c["gold_deep"]};margin-top:8px;font-weight:500">'
                 f'{html.escape(HANDLE)}</div></div>'))
-    return _anim_page(veil + art + t, OPENING_DUR, 0.7, bg=bg)
+    return _anim_page(art + t, OPENING_DUR, 0.8, bg=bg)
 
 
 def CF_reminder(bg=None):

@@ -321,7 +321,8 @@ def main():
     hidden += [(c["out_start"], c["out_start"] + item_dur(c)) for c in items if c["type"] == "card"]
 
     # 106 % framing on jarring jump cuts not covered by a graphic or B-roll
-    covered = [(o["t0"], o["t1"]) for o in overlays]
+    # (the side-panel title and the Subscribe reminder leave the speaker in view, so they don't count)
+    covered = [(o["t0"], o["t1"]) for o in overlays if o["type"] != "anim"]
     jar_t = [j["output_t"] for j in json.load(open(jar_path))]
     for it in items:
         if it["type"] == "src" and any(abs(it["out_start"] - t) < 0.05 for t in jar_t) \

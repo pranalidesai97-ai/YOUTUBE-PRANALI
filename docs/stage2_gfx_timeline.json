@@ -3,10 +3,14 @@
   "id": "OPEN",
   "type": "anim",
   "asset": "opening",
-  "note": "Opening title (Champagne Editorial) over the hook, gone before 'Hi everyone' at 0:06.5",
-  "t0": 0.0,
-  "dur": 5.0,
-  "t1": 5.0,
+  "note": "Opening title (Champagne Editorial side panel) while the speaker says 'Hi everyone, welcome to my channel'",
+  "start": [
+   "hi everyone",
+   66.8
+  ],
+  "dur": 5.5,
+  "t0": 6.525,
+  "t1": 12.025,
   "cues": {}
  },
  {
