@@ -101,3 +101,23 @@ Full data: `docs/FINAL_v3_qc_report.json`.
 | Jump-cut framing | 106 % punch-in at 0:06.4 kept |
 
 Delivered as `.001`/`.002` byte-exact pieces (rejoin verified against the SHA-256) + a 720p preview.
+
+---
+
+## v4 master (end screen: arched "Your next chapter" panel), 2026-10-25 — current final
+
+`Lessons_from_my_twenties_FINAL_v4_1080p30.mp4`: 509,748,964 bytes, SHA-256 `7a0fda10f2db708496092e6df63cc1bc9d604848664b027573538e60351fde6a`.
+Only render chunk 19 (the 18 s end screen, 10:42.57–11:00.57) was re-rendered; chunks 0–18 and the audio mix are reused from v3.
+Full data: `docs/FINAL_v4_qc_report.json`.
+
+| Check | Result |
+|---|---|
+| Unchanged outside the end screen | frames 0–19,276 (0:00–10:42.57): **0 of 19,277 differ** from v3 (per-frame MD5 of the decoded picture); AAC audio stream byte-identical to v3 (MD5 `223dbe06…`) |
+| Video | H.264 High 1920×1080, 30/1 CFR, **19,817 frames**, faststart |
+| Decode errors / black frames | none / none |
+| Loudness | −16.0 LUFS, LRA 4.5 LU, true peak −1.5 dBTP; no dropouts |
+| Sync vs source (12 points) | picture within ±1 frame, audio −0.5 to +0.2 ms |
+| Audio continuity | 0 packet gaps; sample-exact vs the continuous mix at 10 points incl. 5:26.5–5:29.0 |
+| Jump-cut framing | 106 % punch-ins kept (0:06.4, 3:43.5, …) |
+
+The "43 ms gap at 5:27.8" belonged only to the v1 two-part delivery (a stream-copy split/join). Since v2 the master is one continuous render, so there is no join in the audio; split delivery is byte-level and rejoins to the identical SHA-256.
