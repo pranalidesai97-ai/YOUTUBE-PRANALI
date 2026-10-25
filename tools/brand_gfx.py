@@ -709,23 +709,53 @@ def CF_reminder(bg=None):
     return _anim_page(art + t, REMINDER_DUR, 0.55, bg=bg)
 
 
+NEXT_TITLE, NEXT_LINE = "Your next chapter", "More life lessons soon"
+NEXT_ARCH = (1112, 150, 620, 760)        # x, y, w, h of the arched "next chapter" panel (decorative, not a video slot)
+
+
+def _arch(x, y, w, h, inset=0):
+    r = w / 2 - inset
+    x0, x1, yb = x + inset, x + w - inset, y + h - inset
+    return f"M{x0} {yb} V{y + w / 2} A{r} {r} 0 0 1 {x1} {y + w / 2} V{yb} Z"
+
+
 def CF_end(guides=False):
     c = C
-    bx, by, bw, bh = WATCH_BOX
     sx, sy, sr = SUB_CIRCLE
+    ax, ay, aw, ah = NEXT_ARCH
+    acx = ax + aw / 2
     base = svg(f'<rect width="1920" height="1080" fill="url(#plumGlow)"/><rect width="1920" height="1080" filter="url(#grain)" opacity=".7"/>')
+    panel = (f'<g filter="url(#shadow)"><path d="{_arch(ax, ay, aw, ah)}" fill="{c["ivory"]}" opacity=".97"/></g>'
+             # paper grain clipped to the arch (the filter itself fills its whole bounding box)
+             f'<clipPath id="archClip"><path d="{_arch(ax, ay, aw, ah)}"/></clipPath>'
+             f'<g clip-path="url(#archClip)"><rect x="{ax}" y="{ay}" width="{aw}" height="{ah}" filter="url(#grain)" opacity=".8"/></g>')
+    blooms = (flower(acx - 70, ay + ah - 92, 30, "petalRose", 6, 10, seed=71)
+              + flower(acx + 64, ay + ah - 84, 24, "petalBlush", 5, 30, seed=72)
+              + flower(acx - 4, ay + ah - 120, 20, "petalRose", 5, 50, seed=73)
+              + leaf(acx - 118, ay + ah - 70, 62, 200) + leaf(acx + 100, ay + ah - 64, 58, -20)
+              + leaf(acx - 30, ay + ah - 60, 50, 150, vein=False) + leaf(acx + 30, ay + ah - 58, 46, 30, vein=False))
     art = svg(_g(gold_frame(40, 40, 1840, 1000, 10, 1.4, corners=False), 0.1, 1.8, "draw")
               + _g(fineline(96, 1032, .78, 4) + fineline(196, 1040, .5, -16, flip=True), 0.6, 2.6, "draw")
               + _g(fineline(1836, 1032, .62, -6, flip=True), 0.9, 2.4, "draw")
               + _g(fineline(1822, 66, .38, 176), 1.1, 2.2, "draw")
-              + _g(f'<rect x="{bx}" y="{by}" width="{bw}" height="{bh}" fill="#4A3446" opacity=".55"/>', 0.9, 0.9)
-              + _g(gold_frame(bx - 16, by - 16, bw + 32, bh + 32, 8, 1.4), 1.0, 1.4, "draw")
+              + _g(panel, 0.8, 1.0)
+              + _g(f'<path d="{_arch(ax, ay, aw, ah, 18)}" fill="none" stroke="url(#gold)" stroke-width="1.5"/>'
+                   f'<path d="{_arch(ax, ay, aw, ah, 27)}" fill="none" stroke="url(#gold)" stroke-width=".8"/>', 1.0, 1.6, "draw")
+              + _g(fineline(ax + 64, ay + ah - 36, .32, 6) + fineline(ax + aw - 64, ay + ah - 36, .32, -6, flip=True), 1.3, 2.4, "draw")
+              + _g(blooms, 2.0, 1.0)
+              + _g(sparkle(acx, ay + 74, 13, cls="tw") + sparkle(acx - 26, ay + 100, 6, op=.8, cls="tw")
+                   + sparkle(acx + 28, ay + 104, 5, op=.8, cls="tw"), 1.6, 0.8)
               + _g(f'<circle cx="{sx}" cy="{sy}" r="{sr + 12}" fill="none" stroke="url(#gold)" stroke-width="1.6"/>'
                    f'<circle cx="{sx}" cy="{sy}" r="{sr + 20}" fill="none" stroke="url(#gold)" stroke-width=".8"/>', 1.3, 1.4, "draw")
               + _g(wax_seal(sx + sr + 4, sy - sr + 6, 34), 2.1, 0.8, "seal")
               + _g(sparkle(930, 130, 12, c["gold_light"], cls="tw") + sparkle(955, 156, 6, c["gold_light"], .8, cls="tw")
-                   + sparkle(1790, 760, 8, c["gold_light"], .8, cls="tw"), 1.4, 0.8)
-              + _g(ribbon(bx + bw / 2 - 180, by + bh + 44, 360, 60, "watch next", c["sage_deep"], size=24, spacing=".26em"), 1.8, 0.8))
+                   + sparkle(1790, 760, 8, c["gold_light"], .8, cls="tw"), 1.4, 0.8))
+    nxt = text(ax + 40, ay + 236, aw - 80,
+               f'<div class="play" {_a(1.5, 1.0)} style="font-size:78px;line-height:1.05;font-style:italic;color:{c["plum"]}">'
+               f'{html.escape(NEXT_TITLE)}</div>'
+               f'<div {_a(1.75, 0.9, dy=0)}>{_divider(c["gold_deep"], 200)}</div>'
+               f'<div class="mont" {_a(1.95, 0.9)} style="font-size:25px;letter-spacing:.2em;text-transform:uppercase;'
+               f'color:{c["gold_deep"]};font-weight:600">{html.escape(NEXT_LINE)}</div>')
     t = (text(150, 128, 820,
               f'<div class="mont" {_a(0.4)} style="font-size:24px;letter-spacing:.4em;text-transform:uppercase;color:{c["gold_light"]};font-weight:500">'
               f'with love &amp; gratitude</div>'
@@ -745,7 +775,7 @@ def CF_end(guides=False):
                 f'{html.escape(HANDLE)}</div></div>',
                 align="left"))
     # the backdrop stays put; only the artwork and text fade out over the last second
-    doc = _anim_page(art + t + (guides_overlay() if guides else ""), END_DUR, 1.0, opaque=True)
+    doc = _anim_page(art + t + nxt + (guides_overlay(watch=False) if guides else ""), END_DUR, 1.0, opaque=True)
     return doc.replace('<div id="root"', base + '<div id="root"', 1)
 
 
@@ -773,15 +803,16 @@ def render_frames(doc, dur, out_dir, fps=30, alpha=True, start=0, stop=None):
 ANIM = {"opening": (CF_opening, OPENING_DUR), "subscribe": (CF_reminder, REMINDER_DUR)}
 
 
-def guides_overlay():
+def guides_overlay(watch=True):
     """Where YouTube's own end-screen elements go (preview only, never rendered)."""
     bx, by, bw, bh = WATCH_BOX
     sx, sy, sr = SUB_CIRCLE
     lab = "font-family:Manrope;font-size:20px;font-weight:600;color:#fff;letter-spacing:.06em"
-    return (f'<div class="abs" style="left:{bx}px;top:{by}px;width:{bw}px;height:{bh}px;background:rgba(30,30,30,.55);'
-            f'border:3px dashed #fff;box-sizing:border-box;display:flex;align-items:center;justify-content:center;{lab}">'
-            f'YouTube "Video" element (placed in YouTube Studio)</div>'
-            f'<div class="abs" style="left:{sx - sr}px;top:{sy - sr}px;width:{2 * sr}px;height:{2 * sr}px;border-radius:50%;'
+    box = (f'<div class="abs" style="left:{bx}px;top:{by}px;width:{bw}px;height:{bh}px;background:rgba(30,30,30,.55);'
+           f'border:3px dashed #fff;box-sizing:border-box;display:flex;align-items:center;justify-content:center;{lab}">'
+           f'YouTube "Video" element (placed in YouTube Studio)</div>')
+    return ((box if watch else "")
+            + f'<div class="abs" style="left:{sx - sr}px;top:{sy - sr}px;width:{2 * sr}px;height:{2 * sr}px;border-radius:50%;'
             f'background:rgba(30,30,30,.55);border:3px dashed #fff;box-sizing:border-box;display:flex;align-items:center;'
             f'justify-content:center;text-align:center;{lab};font-size:15px">YouTube<br>Subscribe<br>element</div>')
 
