@@ -44,3 +44,7 @@ Chapters
 ## Captions
 
 Upload `docs/FINAL_captions.srt` as an English caption track (it matches the final edit; the five Hindi lines are in Devanagari).
+
+## Thumbnail
+
+"5 / I wish I / knew this", Champagne Editorial: `brand_gfx.CF_thumbnail`, over a caption-free still from the source (closing smile, source 978.6 s; crop 1152×648 at 570,40, lightly warmed). Designed at 1920×1080 and delivered as a 1280×720 JPEG (~165 KB); the bottom-right corner is kept clear for YouTube's duration badge. The image is not stored in the repo (it shows the speaker).

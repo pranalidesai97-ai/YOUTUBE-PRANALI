@@ -779,6 +779,33 @@ def CF_end(guides=False):
     return doc.replace('<div id="root"', base + '<div id="root"', 1)
 
 
+THUMB_LINES = ("I wish I", "knew this")
+
+
+def CF_thumbnail(bg):
+    """YouTube thumbnail (designed at 1920x1080, delivered at 1280x720). `bg` is a warmed still with the
+    speaker on the left; an ivory wash carries the title on the right. Bottom-right stays clear for
+    YouTube's duration badge."""
+    c = C
+    wash = ('<div class="abs" style="left:1000px;top:0;width:920px;height:1080px;background:linear-gradient(90deg,'
+            'rgba(248,242,233,0) 0%,rgba(248,242,233,.84) 16%,rgba(248,242,233,.9) 100%)"></div>')
+    art = svg(gold_frame(26, 26, 1868, 1028, 10, 2.4, corners=False)
+              + fineline(1862, 40, .58, 176)
+              + fineline(1770, 30, .36, 196, flip=True)
+              + flower(1296, 820, 26, "petalRose", 6, 10, seed=81) + flower(1338, 846, 16, "petalBlush", 5, 40, seed=82)
+              + leaf(1262, 842, 46, 160) + leaf(1362, 830, 40, -10)
+              + f'<path d="M1150 790 C1300 770 1500 772 1700 792" fill="none" stroke="{c["rose_deep"]}" stroke-width="5" '
+                f'stroke-linecap="round" opacity=".85"/>'
+              + sparkle(1214, 200, 18) + sparkle(1250, 238, 9, op=.8) + sparkle(1764, 300, 12, op=.85))
+    t = text(1060, 150, 760,
+             f'<div class="play" style="font-size:250px;line-height:.86;font-style:italic;color:{c["gold_deep"]}">5</div>'
+             f'<div class="play" style="font-size:150px;line-height:1.0;color:{c["plum_deep"]};font-weight:600;margin-top:30px">'
+             f'{THUMB_LINES[0]}</div>'
+             f'<div class="play" style="font-size:166px;line-height:1.0;color:{c["plum_deep"]};font-style:italic;font-weight:500">'
+             f'{THUMB_LINES[1]}</div>')
+    return page(wash + art + t, bg=bg)
+
+
 def render_frames(doc, dur, out_dir, fps=30, alpha=True, start=0, stop=None):
     """Step window.setT through the page and save f00000.png... (alpha kept for overlays)."""
     from playwright.sync_api import sync_playwright
