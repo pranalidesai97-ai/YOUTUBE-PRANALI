@@ -82,3 +82,22 @@ Rendered in one pass from the original (source SHA-256 re-verified). Full data: 
 | Audio continuity | 30,966 AAC packets, 0 timestamp gaps; sample-exact (lag 0, corr 1.0000) against the continuous rendered mix at 21 points incl. 5:26.5–5:29.0 |
 
 The v1 two-part delivery, rejoined by stream copy, sits a constant 1024 samples (21.3 ms) off the mix throughout. That came from the split/join, not the mix. v2 is delivered as one file, split byte-for-byte (`split`, `.001`/`.002`), which rejoins to the identical SHA-256.
+
+---
+
+## v3 master (opening title as a side panel during the greeting), 2026-10-25 — current final
+
+`Lessons_from_my_twenties_FINAL_v3_1080p30.mp4`: 507,899,574 bytes, SHA-256 `456b39e31f077381e6097c1f34e53ceab4339f9dc89ae1120dca36010bb0f831`.
+Only render chunk 0 (0:00–0:39.9, which holds the revised opening) was re-rendered from the source; the other 19 chunks and the audio mix are byte-identical to v2.
+Full data: `docs/FINAL_v3_qc_report.json`.
+
+| Check | Result |
+|---|---|
+| Video | H.264 High 1920×1080, 30/1 CFR, **19,817 frames**, faststart |
+| Decode errors / black frames | none / none |
+| Loudness | −16.0 LUFS, LRA 4.5 LU, true peak −1.5 dBTP; no dropouts |
+| Sync vs source (12 points) | picture within ±1 frame, audio −0.5 to +0.2 ms |
+| Audio continuity | 0 packet gaps; sample-exact vs the continuous mix and vs v2 (incl. 0:06.5 and 5:27.8) |
+| Jump-cut framing | 106 % punch-in at 0:06.4 kept |
+
+Delivered as `.001`/`.002` byte-exact pieces (rejoin verified against the SHA-256) + a 720p preview.
